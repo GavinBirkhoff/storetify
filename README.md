@@ -1,0 +1,2 @@
+# pro-store
+better localStorage
