@@ -1,8 +1,6 @@
-![GitHub](https://img.shields.io/github/license/gavinbirkhoff/pro-store)
 本地存储localStorage的封装，提供过期时间设置和订阅功能，提供简单API使用，没有依赖，压缩只有 3.81KB(gzipped: 1.39KB)。
-<div align="center">
-[English](https://github.com/gavinbirkhoff/pro-store/README.md) | 简体中文
-</div>
+
+[English](https://github.com/gavinbirkhoff/pro-store/README.md) | 简体中文 ![GitHub](https://img.shields.io/github/license/gavinbirkhoff/pro-store)
 
 ## ✨ Features
 

@@ -1,10 +1,6 @@
-![GitHub](https://img.shields.io/github/license/gavinbirkhoff/pro-store)
-
 The encapsulation of local storage localStorage, provides expiration time setting and subscription functions, provides simple API use, no dependencies, and the compression is only 3.71KB (gzipped: 1.37KB).
 
-<div align="center">
-English | [简体中文](https://github.com/gavinbirkhoff/pro-store/README.zh-CN.md)
-</div>
+English | [简体中文](https://github.com/gavinbirkhoff/pro-store/README.zh-CN.md) ![GitHub](https://img.shields.io/github/license/gavinbirkhoff/pro-store)
 
 ## ✨ Features
 
