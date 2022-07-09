@@ -17,6 +17,11 @@
     "subscribe",
     "listen"
   ],
+  "files": [
+    "lib",
+    "package.json",
+    "README.md"
+  ],
   "author": "GavinBirkhoff",
   "license": "MIT",
   "husky": {
