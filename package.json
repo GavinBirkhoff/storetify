@@ -1,6 +1,6 @@
 {
   "name": "local-store-pro",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Better localStorage, Subscribe localStorage",
   "main": "./lib/local-store-pro.cjs.js",
   "module": "./lib/local-store-pro.esm.js",
@@ -9,7 +9,8 @@
   "scripts": {
     "lint": "eslint src --ext .js,.ts",
     "test": "jest --no-cache",
-    "build": "rm -rf ./lib/* && rollup -c"
+    "build": "rm -rf ./lib/* && rollup -c",
+    "publish": "npm run test && npm run build && npm publish"
   },
   "keywords": [
     "localStorage",
