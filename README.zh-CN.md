@@ -108,8 +108,8 @@ store.subscribe("test",(e)=>{})
 | Property | Type | Description|
 | -------- | ------ | ------------------------------------------------------------ |
 | key| `string` | 存储值的键，根据其修改、删除|
-| oldValue | `Partial<any> | null | string`| 上一次的值 |
-| newValue | `Partial<any> | null | string`| 当前新的值 |
+| oldValue | Partial<any> \| null \| string| 上一次的值 |
+| newValue | Partial<any> \| null \| string| 当前新的值 |
 | type| `string` | 事件类型 |
 
 ### unsubscribe

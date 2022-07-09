@@ -108,8 +108,8 @@ For the event variable e, it is an abbreviated object from the StorageEvent obje
 | Property | Type | Description|
 | -------- | ------ | ------------------------------------------------------------ |
 | key| `string` | The key to store the value, modify, delete according to it |
-| oldValue | `Partial<any> | null | string`| last value |
-| newValue | `Partial<any> | null | string`| current new value |
+| oldValue | Partial<any> \| null \| string| last value |
+| newValue | Partial<any> \| null \| string| current new value |
 | type| `string` | event type |
 
 ### unsubscribe
