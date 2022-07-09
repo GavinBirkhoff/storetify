@@ -36,7 +36,7 @@ or manually download and include in your HTML **local-store-pro.min.js**，you c
 ```html
 <script src="https://unpkg.com/local-store-pro/lib/local-store-pro.min.js"></script>
 <script type="text/javascript">
-store("test","gavin");
+LocalStorePro("test","local-store-pro");
 </script>
 ```
 

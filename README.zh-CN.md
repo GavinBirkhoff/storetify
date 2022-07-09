@@ -36,7 +36,7 @@ npm test
 ```html
 <script src="https://unpkg.com/local-store-pro/lib/local-store-pro.min.js"></script>
 <script type="text/javascript">
-store("test","gavin");
+LocalStorePro("test","local-store-pro");
 </script>
 ```
 
