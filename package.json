@@ -1,6 +1,6 @@
 {
   "name": "pro-store",
-  "version": "1.0.0-beta",
+  "version": "1.0.0",
   "description": "Better localStorage, Subscribe localStorage",
   "main": "./lib/pro-store.cjs.js",
   "module": "./lib/pro-store.esm.js",
