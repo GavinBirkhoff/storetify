@@ -5,7 +5,7 @@ import { dispatchStorageEvent, each, jsonParse } from "./utils"
  * Power localStorage
  */
 class PowerStorage {
-  namespace = "pro-store"
+  namespace = "local-store-pro"
 
   protected store = localStorage
 

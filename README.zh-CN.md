@@ -1,6 +1,6 @@
 本地存储localStorage的封装，提供过期时间设置和订阅功能，提供简单API使用，没有依赖，压缩只有 3.81KB(gzipped: 1.39KB)。
 
-[English](https://github.com/GavinBirkhoff/pro-store/blob/main/README.md) | 简体中文 ![GitHub](https://img.shields.io/github/license/gavinbirkhoff/pro-store)
+[English](https://github.com/GavinBirkhoff/local-store-pro/blob/main/README.md) | 简体中文 ![GitHub](https://img.shields.io/github/license/gavinbirkhoff/local-store-pro)
 
 ## ✨ Features
 
@@ -14,7 +14,7 @@
 
 ```bash
 # npm 安装
-npm install pro-store
+npm install local-store-pro
 ```
 
 ## 🏗️ 构建
@@ -31,10 +31,10 @@ npm test
 
 # 🔨 使用
 
-或者在您的HTML中手动下载并引入 **pro-store.min.js**，你也可以通过 [UNPKG](https://unpkg.com/pro-store/lib/) 进行下载：
+或者在您的HTML中手动下载并引入 **local-store-pro.min.js**，你也可以通过 [UNPKG](https://unpkg.com/local-store-pro/lib/) 进行下载：
 
 ```html
-<script src="https://unpkg.com/pro-store/lib/pro-store.min.js"></script>
+<script src="https://unpkg.com/local-store-pro/lib/local-store-pro.min.js"></script>
 <script type="text/javascript">
 store("test","gavin");
 </script>
@@ -43,8 +43,8 @@ store("test","gavin");
 or
 
 ```js
-import store from 'pro-store';
-store("test","pro-store");
+import store from 'local-store-pro';
+store("test","local-store-pro");
 ```
 
 # ⚙️ API

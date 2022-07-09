@@ -1,6 +1,6 @@
 The encapsulation of local storage localStorage, provides expiration time setting and subscription functions, provides simple API use, no dependencies, and the compression is only 3.71KB (gzipped: 1.37KB).
 
-English | [简体中文](https://github.com/GavinBirkhoff/pro-store/blob/main/README.zh-CN.md) ![GitHub](https://img.shields.io/github/license/gavinbirkhoff/pro-store)
+English | [简体中文](https://github.com/GavinBirkhoff/local-store-pro/blob/main/README.zh-CN.md) ![GitHub](https://img.shields.io/github/license/gavinbirkhoff/local-store-pro)
 
 ## ✨ Features
 
@@ -14,7 +14,7 @@ English | [简体中文](https://github.com/GavinBirkhoff/pro-store/blob/main/RE
 
 ```bash
 # npm install
-npm install pro-store
+npm install local-store-pro
 ```
 
 ## 🏗️ Build
@@ -31,10 +31,10 @@ npm test
 
 # 🔨 Usage
 
-or manually download and include in your HTML **pro-store.min.js**，you can also pass [UNPKG](https://unpkg.com/pro-store/lib/) to download：
+or manually download and include in your HTML **local-store-pro.min.js**，you can also pass [UNPKG](https://unpkg.com/local-store-pro/lib/) to download：
 
 ```html
-<script src="https://unpkg.com/pro-store/lib/pro-store.min.js"></script>
+<script src="https://unpkg.com/local-store-pro/lib/local-store-pro.min.js"></script>
 <script type="text/javascript">
 store("test","gavin");
 </script>
@@ -43,8 +43,8 @@ store("test","gavin");
 or
 
 ```js
-import store from 'pro-store';
-store("test","pro-store");
+import store from 'local-store-pro';
+store("test","local-store-pro");
 ```
 
 ## ⚙️ API

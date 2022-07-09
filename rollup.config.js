@@ -38,7 +38,7 @@ export default {
     {
       format: "umd",
       file: `lib/${pkg.name}.min.js`,
-      name: "ProStore",
+      name: "LocalStorePro",
       noConflict: true,
       sourcemap: true,
     },

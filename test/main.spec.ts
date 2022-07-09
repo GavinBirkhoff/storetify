@@ -1,9 +1,9 @@
 import store from "../src/main"
 import fn from "../example/fn"
 jest.mock("../example/fn")
-const keyPrefix = "test-pro-store"
+const keyPrefix = "test-local-store-pro"
 const getKey = (key: string) => keyPrefix + key
-describe("pro-store", () => {
+describe("local-store-pro", () => {
   test("test store obj", () => {
     store.set("obj", { type: "object", value: { a: 1 } })
     expect(store("obj")).toEqual({ type: "object", value: { a: 1 } })
