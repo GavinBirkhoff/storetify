@@ -6,3 +6,4 @@ package.json
 /dist
 .DS_Store
 .history
+tsconfig.json
