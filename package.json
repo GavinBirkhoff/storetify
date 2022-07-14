@@ -13,7 +13,7 @@
     "build": "npm run build:es & npm run build:lib",
     "build:es": "rm -rf ./dist/* && rm -rf ./types/* && tsc",
     "build:lib": "rm -rf ./lib/* && rollup -c",
-    "publish": "npm run test && npm run build && npm publish"
+    "pub": "npm run test && npm run build && npm publish"
   },
   "keywords": [
     "localStorage",
