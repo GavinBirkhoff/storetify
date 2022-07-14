@@ -1,8 +1,10 @@
-import storage from "./PowerStorage"
-import { DispatchPublishEvent, SubStore } from "./type"
+import PowerStorage from "./PowerStorage"
+import { DispatchPublishEvent, LocalStorePro, LocalStoreRaw, StorageValueType } from "./type"
 import { jsonParse } from "./utils"
 
-function store(...rest: any[]): Partial<any> | null | string {
+const storage = PowerStorage.getInstance()
+
+const store: LocalStoreRaw = function (...rest: any[]): StorageValueType | PowerStorage {
   const len = rest.length
   const [key, value, expires] = rest
   if (len === 1 && typeof key === "string") {
@@ -20,13 +22,14 @@ function store(...rest: any[]): Partial<any> | null | string {
   return null
 }
 
-function init() {
+function init(): LocalStorePro {
   Object.entries(Object.getPrototypeOf(storage)).forEach(item => {
     const [key, value] = item
     if (key !== "constructor" && key !== "getStore") {
       ;(<any>store)[key] = (value as any).bind(storage)
     }
   })
+  store.localStore = storage
   function dispatchPublish({ key, newValue, oldValue, type }: DispatchPublishEvent) {
     if (newValue !== oldValue) {
       if (type === "storage") {
@@ -52,8 +55,7 @@ function init() {
     window.addEventListener("setItemEvent", setItemEventFunc)
     window.addEventListener("storage", storageFunc)
   }
-
-  return store as SubStore
+  return store as LocalStorePro
 }
 
 export default init()

@@ -1,5 +1,6 @@
-import store from "../src/main"
+import store from "../src/index"
 import fn from "../example/fn"
+
 jest.mock("../example/fn")
 const keyPrefix = "test-local-store-pro"
 const getKey = (key: string) => keyPrefix + key

@@ -1,10 +1,10 @@
-import { DispatchPublishEvent } from "./type"
+import { DispatchPublishEvent, StorageValueType } from "./type"
 import { dispatchStorageEvent, each, jsonParse } from "./utils"
 /**
- * PowerStorage
+ * StoragePro
  * Power localStorage
  */
-class PowerStorage {
+class StoragePro {
   namespace = "local-store-pro"
 
   protected store = localStorage
@@ -14,13 +14,13 @@ class PowerStorage {
   protected hasBindWindow = false
 
   // eslint-disable-next-line no-use-before-define
-  protected static storage: PowerStorage | null = null
+  protected static storage: StoragePro | null = null
 
-  public static getInstance(): PowerStorage {
-    if (!PowerStorage.storage) {
-      PowerStorage.storage = new PowerStorage()
+  public static getInstance(): StoragePro {
+    if (!StoragePro.storage) {
+      StoragePro.storage = new StoragePro()
     }
-    return PowerStorage.storage
+    return StoragePro.storage
   }
 
   public setHasBindWindow(e: boolean) {
@@ -47,7 +47,7 @@ class PowerStorage {
     return this.store
   }
 
-  public set(key: string, value: Partial<any> | string | null, expires?: number) {
+  public set(key: string, value: StorageValueType, expires?: number) {
     const val = JSON.stringify({ value, expires: expires ? expires * 1000 + Date.now() : expires })
     try {
       const newValue = value
@@ -59,7 +59,7 @@ class PowerStorage {
     return this
   }
 
-  public get(key: string): null | Partial<any> | string {
+  public get(key: string): StorageValueType {
     const val = this.store.getItem(key) ?? null
     if (val === null) {
       return val
@@ -106,6 +106,10 @@ class PowerStorage {
     return this
   }
 
+  public getObserver(key: string): any[] | undefined {
+    return this.observers.get(key)
+  }
+
   public unsubscribe(keys?: string | string[], action?: () => void) {
     if (Array.isArray(keys)) {
       keys.forEach(key => {
@@ -138,4 +142,5 @@ class PowerStorage {
     this.store.clear()
   }
 }
-export default PowerStorage.getInstance()
+
+export default StoragePro
