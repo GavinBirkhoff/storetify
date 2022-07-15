@@ -117,7 +117,7 @@ class StoragePro {
       })
     } else if (typeof keys === "string" && action) {
       let actions = this.observers.get(keys)
-      if (action.name) {
+      if (action.name && actions) {
         actions = actions.filter((item: any) => item.name !== action.name)
         this.observers.set(keys, actions)
       }
