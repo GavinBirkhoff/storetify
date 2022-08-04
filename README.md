@@ -1,6 +1,8 @@
-The encapsulation of local storage localStorage, provides expiration time setting and subscription functions, provides simple API use, no dependencies, and the compression is only 3.71KB (gzipped: 1.37KB).
+English | [简体中文](https://github.com/GavinBirkhoff/local-store-pro/blob/main/README.zh-CN.md)
 
-English | [简体中文](https://github.com/GavinBirkhoff/local-store-pro/blob/main/README.zh-CN.md) ![GitHub](https://img.shields.io/github/license/gavinbirkhoff/local-store-pro)
+![license](https://img.shields.io/github/license/gavinbirkhoff/local-store-pro) ![release](https://img.shields.io/github/release/gavinbirkhoff/local-store-pro.svg)
+
+The encapsulation of local storage localStorage, provides expiration time setting and subscription functions, provides simple API use, no dependencies, and the compression is only 3.71KB (gzipped: 1.37KB).
 
 ## ✨ Features
 

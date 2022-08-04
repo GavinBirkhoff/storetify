@@ -1,6 +1,8 @@
-本地存储localStorage的封装，提供过期时间设置和订阅功能，提供简单API使用，没有依赖，压缩只有 3.81KB(gzipped: 1.39KB)。
+[English](https://github.com/GavinBirkhoff/local-store-pro/blob/main/README.md) | 简体中文
 
-[English](https://github.com/GavinBirkhoff/local-store-pro/blob/main/README.md) | 简体中文 ![GitHub](https://img.shields.io/github/license/gavinbirkhoff/local-store-pro)
+![license](https://img.shields.io/github/license/gavinbirkhoff/local-store-pro) ![release](https://img.shields.io/github/release/gavinbirkhoff/local-store-pro.svg)
+
+本地存储localStorage的封装，提供过期时间设置和订阅功能，提供简单API使用，没有依赖，压缩只有 3.81KB(gzipped: 1.39KB)。
 
 ## ✨ Features
 
