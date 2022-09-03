@@ -5,6 +5,9 @@ jest.mock("../example/fn")
 const keyPrefix = "test-local-store-pro"
 const getKey = (key: string) => keyPrefix + key
 describe("local-store-pro", () => {
+  test("store() return null", () => {
+    expect(store()).toBe(null)
+  })
   test("test store obj", () => {
     store.set("obj", { type: "object", value: { a: 1 } })
     expect(store("obj")).toEqual({ type: "object", value: { a: 1 } })
@@ -12,6 +15,10 @@ describe("local-store-pro", () => {
   test("test store(a,b)", () => {
     store(getKey("a"), "a")
     expect(store(getKey("a"))).toBe("a")
+    store(getKey("a"), undefined)
+    expect(store(getKey("a"))).toBe(null)
+    store(getKey("a-func"), () => "a-func")
+    expect(store(getKey("a-func"))).toBe("a-func")
   })
   test("test store.set(a,b)", () => {
     store.set(getKey("b"), "b")
@@ -24,6 +31,7 @@ describe("local-store-pro", () => {
       expect(store.get("c")).toBe(null)
       done()
     }, 2000)
+    expect(store.get("c")).toBe("c")
   })
   test("test subscribe", () => {
     const fn = jest.fn()
@@ -90,5 +98,11 @@ describe("local-store-pro", () => {
     expect(fn1).toBeCalledTimes(3)
     expect(fn2).toBeCalledTimes(5)
     expect(fn3).toBeCalledTimes(5)
+  })
+  test("clear localStorage", () => {
+    store("token", "admin")
+    expect(store("token")).toBe("admin")
+    localStorage.clear()
+    expect(store("token")).toBe(null)
   })
 })
