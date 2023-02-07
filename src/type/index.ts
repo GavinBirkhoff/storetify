@@ -17,15 +17,15 @@ export interface IDispatchEvent extends Event {
   oldValue: StorageValueType
 }
 
-interface StorePro {
+export interface StorePro {
   localStore: PowerStorage
   set: (key: string, value: Partial<any> | string | null, expires?: number) => void
   get: (key: string) => null | Partial<any> | string
   remove: (key: string) => void
   has: (key: string) => boolean
   clear: () => void
-  subscribe: (key: string, action: () => void) => void
-  unsubscribe: (keys: string | string[], action?: () => void) => void
+  subscribe: (key: string, action: (e?: DispatchPublishEvent) => void) => void
+  unsubscribe: (keys: string | string[], action?: (e: any) => void) => void
 }
 
 export interface LocalStoreRaw extends Partial<StorePro> {
@@ -35,3 +35,5 @@ export interface LocalStoreRaw extends Partial<StorePro> {
 export interface LocalStorePro extends StorePro {
   (...rest: any[]): StorageValueType | PowerStorage
 }
+
+export type LocalStoragePro = PowerStorage

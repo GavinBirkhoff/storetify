@@ -110,7 +110,7 @@ class StoragePro {
     return this.observers.get(key)
   }
 
-  public unsubscribe(keys?: string | string[], action?: () => void) {
+  public unsubscribe(keys?: string | string[], action?: (e?: any) => void) {
     if (Array.isArray(keys)) {
       keys.forEach(key => {
         this.observers.delete(key)

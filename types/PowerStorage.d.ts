@@ -23,7 +23,7 @@ declare class StoragePro {
     publishAll(e: any): void;
     subscribe(key: string, action: (e?: DispatchPublishEvent) => void): this;
     getObserver(key: string): any[] | undefined;
-    unsubscribe(keys?: string | string[], action?: () => void): void;
+    unsubscribe(keys?: string | string[], action?: (e?: any) => void): void;
     remove(key: string): this;
     clear(): void;
 }
