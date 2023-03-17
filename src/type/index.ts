@@ -1,39 +1,45 @@
-import PowerStorage from "../PowerStorage"
+import NextStorage from "../PowerStorage"
 
-export type StorageKeyType = string | null
-export type StorageValueType = Partial<any> | null | string
-export type StorageEventType = "storage" | "setItemEvent"
+export type StorageEventKey = string | null
+export type StorageEventValue = string | null
+export type NextStorageEventValue = Partial<any> | null | string
+export type NextStorageEventType = "storage" | "setItemEvent"
+export type StoreArgument<T> = [string?, T?, number?]
+export type StoreListener = (e?: DispatchPublishEvent) => void
 
-export interface DispatchPublishEvent extends Partial<Event> {
-  key: StorageKeyType
-  newValue: StorageValueType
-  oldValue: StorageValueType
-  type: StorageEventType
+export type LocalStoreStageMap = [null, NextStorageEventValue, NextStorage, NextStorage]
+
+export type NextStorageEventValueOrNextStorage<K extends { length: number }> = LocalStoreStageMap[K["length"]]
+export interface DispatchPublishEvent extends Partial<Omit<StorageEvent, "newValue" | "oldValue">> {
+  key: StorageEventKey
+  newValue: NextStorageEventValue
+  oldValue: NextStorageEventValue
+  type: NextStorageEventType
 }
 
 export interface IDispatchEvent extends Event {
-  key: StorageKeyType
-  newValue: StorageValueType
-  oldValue: StorageValueType
+  key: StorageEventKey
+  newValue: NextStorageEventValue
+  oldValue: NextStorageEventValue
 }
 
-export interface StorePro {
-  localStore: PowerStorage
+export interface StoreStage {
+  localStore: NextStorage
   set: (key: string, value: Partial<any> | string | null, expires?: number) => void
   get: (key: string) => null | Partial<any> | string
   remove: (key: string) => void
   has: (key: string) => boolean
   clear: () => void
-  subscribe: (key: string, action: (e?: DispatchPublishEvent) => void) => void
-  unsubscribe: (keys: string | string[], action?: (e: any) => void) => void
+  subscribe: (key: string, action: (e: DispatchPublishEvent) => void) => void
+  unsubscribe: (keys: string | string[], action?: (e: DispatchPublishEvent) => void) => void
 }
 
-export interface LocalStoreRaw extends Partial<StorePro> {
-  (...rest: any[]): StorageValueType | PowerStorage
+export interface LocalStoreStage extends Partial<StoreStage> {
+  <T, K extends StoreArgument<T>>(...rest: K): LocalStoreStageMap[K["length"]]
 }
 
-export interface LocalStorePro extends StorePro {
-  (...rest: any[]): StorageValueType | PowerStorage
+export interface LocalStorePro extends StoreStage {
+  <T, K extends StoreArgument<T>>(...rest: K): LocalStoreStageMap[K["length"]]
 }
 
-export type LocalStoragePro = PowerStorage
+export type LocalStoragePro = NextStorage

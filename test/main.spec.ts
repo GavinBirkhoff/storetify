@@ -105,4 +105,19 @@ describe("local-store-pro", () => {
     localStorage.clear()
     expect(store("token")).toBe(null)
   })
+  test("Type of test", () => {
+    store(
+      "str",
+      function () {
+        return 123
+      },
+      1,
+    )
+    store.subscribe("str", () => {})
+    store.subscribe("str", e => {
+      e.newValue, e.oldValue
+    })
+    store("mm", 0)
+    store("str", 98).get("98k")
+  })
 })

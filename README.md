@@ -6,7 +6,7 @@ The encapsulation of local storage localStorage, provides expiration time settin
 
 ## ✨ Features
 
-- Better to use localStorage
+- Better to use localStorage, Next localStorage
 - Easy to learn and use
 - Expiration time of support data
 - Support for monitoring data changes

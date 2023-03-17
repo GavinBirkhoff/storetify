@@ -1,4 +1,4 @@
-import { DispatchPublishEvent, IDispatchEvent } from "./type"
+import { DispatchPublishEvent, IDispatchEvent, StoreListener } from "./type"
 
 export function dispatchStorageEvent({ key, newValue, oldValue, type }: DispatchPublishEvent) {
   const setItemEvent = new Event(type) as IDispatchEvent
@@ -13,8 +13,8 @@ export function jsonParse(data: string | null) {
   return JSON.parse(dest as string)
 }
 
-export function each(funcs: any[], e: any) {
-  funcs.forEach((func: { (arg0: any): void; (arg0: any): void; name: any }) => {
+export function each(funcs: StoreListener[], e: any) {
+  funcs.forEach((func: StoreListener) => {
     if (typeof func === "function") {
       try {
         func(e)

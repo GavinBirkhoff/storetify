@@ -1,25 +1,33 @@
-import PowerStorage from "./PowerStorage"
-import { DispatchPublishEvent, LocalStorePro, LocalStoreRaw, StorageValueType } from "./type"
+import NextStorage from "./PowerStorage"
+import {
+  DispatchPublishEvent,
+  LocalStorePro,
+  LocalStoreStage,
+  StorageEventValue,
+  NextStorageEventValue,
+  LocalStoreStageMap,
+  StoreArgument,
+} from "./type"
 import { jsonParse } from "./utils"
 
-const storage = PowerStorage.getInstance()
+const storage = NextStorage.getInstance()
 
-const store: LocalStoreRaw = function (...rest: any[]): StorageValueType | PowerStorage {
+const store: LocalStoreStage = function <T, K extends StoreArgument<T>>(...rest: K): LocalStoreStageMap[K["length"]] {
   const len = rest.length
   const [key, value, expires] = rest
   if (len === 1 && typeof key === "string") {
-    return storage.get(key)
+    return storage.get(key) as LocalStoreStageMap[K["length"]]
   }
   if (len >= 2 && typeof key === "string") {
     if (value === undefined) {
-      return storage.remove(key)
+      return storage.remove(key) as LocalStoreStageMap[K["length"]]
     }
     if (typeof value === "function") {
-      return storage.set(key, value(), expires)
+      return storage.set(key, value(), expires) as LocalStoreStageMap[K["length"]]
     }
-    return storage.set(key, value, expires)
+    return storage.set(key, value, expires) as LocalStoreStageMap[K["length"]]
   }
-  return null
+  return null as LocalStoreStageMap[K["length"]]
 }
 
 function init(): LocalStorePro {
@@ -30,11 +38,12 @@ function init(): LocalStorePro {
     }
   })
   store.localStore = storage
-  function dispatchPublish({ key, newValue, oldValue, type }: DispatchPublishEvent) {
+  function dispatchPublish(ev: DispatchPublishEvent) {
+    const { key, newValue, oldValue, type } = ev
     if (newValue !== oldValue) {
       if (type === "storage") {
-        const parseNewValue = jsonParse(newValue as any)?.value ?? null
-        const parseOldValue = jsonParse(oldValue as any)?.value ?? null
+        const parseNewValue = jsonParse(newValue as StorageEventValue)?.value ?? null
+        const parseOldValue = jsonParse(oldValue as StorageEventValue)?.value ?? null
         storage.publish(key as string, { key, newValue: parseNewValue, oldValue: parseOldValue, type }, true)
         return
       }
@@ -46,14 +55,14 @@ function init(): LocalStorePro {
   }
   if (!storage.getHasBindWindow()) {
     storage.setHasBindWindow(true)
-    const setItemEventFunc = (e: any) => {
-      dispatchPublish(e)
+    const setItemEventListener = (e: Event) => {
+      dispatchPublish(e as DispatchPublishEvent)
     }
-    const storageFunc = (e: any) => {
-      dispatchPublish(e)
+    const storageListener = (e: StorageEvent) => {
+      dispatchPublish(e as DispatchPublishEvent)
     }
-    window.addEventListener("setItemEvent", setItemEventFunc)
-    window.addEventListener("storage", storageFunc)
+    window.addEventListener("setItemEvent", setItemEventListener)
+    window.addEventListener("storage", storageListener)
   }
   return store as LocalStorePro
 }

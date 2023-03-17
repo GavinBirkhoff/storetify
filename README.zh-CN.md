@@ -6,7 +6,7 @@
 
 ## ✨ Features
 
-- 更好的去使用localStorage
+- 更好的去使用localStorage, 也认为是下一代的localStorage
 - 易学易用
 - 支持数据的过期时间
 - 支持数据变化的监听

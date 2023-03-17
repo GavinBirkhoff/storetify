@@ -1,10 +1,10 @@
-import { DispatchPublishEvent, StorageValueType } from "./type"
+import { DispatchPublishEvent, NextStorageEventValue, StoreListener } from "./type"
 import { dispatchStorageEvent, each, jsonParse } from "./utils"
 /**
- * StoragePro
- * Power localStorage
+ * NextStorage
+ * Next localStorage
  */
-class StoragePro {
+class NextStorage {
   namespace = "local-store-pro"
 
   protected store = localStorage
@@ -14,13 +14,13 @@ class StoragePro {
   protected hasBindWindow = false
 
   // eslint-disable-next-line no-use-before-define
-  protected static storage: StoragePro | null = null
+  protected static storage: NextStorage | null = null
 
-  public static getInstance(): StoragePro {
-    if (!StoragePro.storage) {
-      StoragePro.storage = new StoragePro()
+  public static getInstance(): NextStorage {
+    if (!NextStorage.storage) {
+      NextStorage.storage = new NextStorage()
     }
-    return StoragePro.storage
+    return NextStorage.storage
   }
 
   public setHasBindWindow(e: boolean) {
@@ -39,7 +39,7 @@ class StoragePro {
     return this.namespace
   }
 
-  public setStore(store: any) {
+  public setStore<T extends Storage>(store: T) {
     this.store = store
   }
 
@@ -47,7 +47,7 @@ class StoragePro {
     return this.store
   }
 
-  public set(key: string, value: StorageValueType, expires?: number) {
+  public set(key: string, value: NextStorageEventValue, expires?: number) {
     const val = JSON.stringify({ value, expires: expires ? expires * 1000 + Date.now() : expires })
     try {
       const newValue = value
@@ -59,7 +59,7 @@ class StoragePro {
     return this
   }
 
-  public get(key: string): StorageValueType {
+  public get(key: string): NextStorageEventValue {
     const val = this.store.getItem(key) ?? null
     if (val === null) {
       return val
@@ -78,23 +78,23 @@ class StoragePro {
     return true
   }
 
-  public publish(key: string | any[], e: any, force = false) {
+  public publish(key: string | StoreListener[], e: DispatchPublishEvent, force = false) {
     if (!key && !force && !this.has(key)) return
     if (Array.isArray(key)) {
       each(key, e)
     } else {
-      const channels = this.observers.get(key) ?? []
+      const channels = this.getObserver(key) ?? []
       each(channels, e)
     }
   }
 
-  public publishAll(e: any) {
-    this.observers.forEach((item: any[]) => {
+  public publishAll(e: DispatchPublishEvent) {
+    this.observers.forEach((item: StoreListener[]) => {
       this.publish(item, e, true)
     })
   }
 
-  public subscribe(key: string, action: (e?: DispatchPublishEvent) => void) {
+  public subscribe(key: string, action: StoreListener) {
     const { observers } = this
     const actions = observers.get(key)
     if (actions) {
@@ -106,11 +106,11 @@ class StoragePro {
     return this
   }
 
-  public getObserver(key: string): any[] | undefined {
+  public getObserver(key: string): StoreListener[] | undefined {
     return this.observers.get(key)
   }
 
-  public unsubscribe(keys?: string | string[], action?: (e?: any) => void) {
+  public unsubscribe(keys?: string | string[], action?: StoreListener) {
     if (Array.isArray(keys)) {
       keys.forEach(key => {
         this.observers.delete(key)
@@ -118,7 +118,7 @@ class StoragePro {
     } else if (typeof keys === "string" && action) {
       let actions = this.observers.get(keys)
       if (action.name && actions) {
-        actions = actions.filter((item: any) => item.name !== action.name)
+        actions = actions.filter((item: StoreListener) => item.name !== action.name)
         this.observers.set(keys, actions)
       }
     } else if (typeof keys === "string") {
@@ -143,4 +143,4 @@ class StoragePro {
   }
 }
 
-export default StoragePro
+export default NextStorage
