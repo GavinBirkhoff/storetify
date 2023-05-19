@@ -112,14 +112,14 @@ class NextStorage {
     })
   }
 
-  public subscribe(key: string, action: StoreListener) {
+  public subscribe(key: string, listener: StoreListener) {
     const { observers } = this
-    const actions = observers.get(key)
-    if (actions) {
-      actions.push(action)
-      // this.observers.set(key, actions)
+    const listeners = observers.get(key)
+    if (listeners) {
+      listeners.push(listener)
+      // this.observers.set(key, listeners)
     } else {
-      this.observers.set(key, [action])
+      this.observers.set(key, [listener])
     }
     return this
   }
@@ -128,16 +128,16 @@ class NextStorage {
     return this.observers.get(key) ?? []
   }
 
-  public unsubscribe(keys?: string | string[], action?: StoreListener) {
+  public unsubscribe(keys?: string | string[], listener?: StoreListener) {
     if (Array.isArray(keys)) {
       keys.forEach(key => {
         this.observers.delete(key)
       })
-    } else if (typeof keys === "string" && action) {
-      let actions = this.observers.get(keys)
-      if (action.name && actions) {
-        actions = actions.filter((item: StoreListener) => item.name !== action.name)
-        this.observers.set(keys, actions)
+    } else if (typeof keys === "string" && listener) {
+      let listeners = this.observers.get(keys)
+      if (listener.name && listeners) {
+        listeners = listeners.filter((item: StoreListener) => item.name !== listener.name)
+        this.observers.set(keys, listeners)
       }
     } else if (typeof keys === "string") {
       this.observers.delete(keys)
