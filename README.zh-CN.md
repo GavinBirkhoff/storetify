@@ -132,6 +132,14 @@ store.unsubscribe("test",someName) // ⚠️注意，取消订阅不能是匿名
 store.unsubscribe("test") // ⚠️注意，会取消test的所有订阅包括匿名函数
 ```
 
+### getUsed
+
+获取store的存储用量
+
+```ts
+store.getUsed() // 返回 `0.111 KB`
+```
+
 ## 兼容
 
 来源：[localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
