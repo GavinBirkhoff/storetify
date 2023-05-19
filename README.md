@@ -6,8 +6,8 @@ The encapsulation of local storage localStorage, provides expiration time settin
 
 ## ✨ Features
 
-- Better to use localStorage, Next localStorage
-- Easy to learn and use
+- Better localStorage, Next localStorage
+- Learn and use easily
 - Expiration time of support data
 - Support for monitoring data changes
 - Built with TypeScript, providing full type definition files
@@ -17,6 +17,12 @@ The encapsulation of local storage localStorage, provides expiration time settin
 ```bash
 # npm install
 npm install local-store-pro
+
+# yarn install
+yarn add local-store-pro
+
+#pnpm install
+pnpm add local-store-pro
 ```
 
 ## 🏗️ Build
@@ -110,9 +116,10 @@ For the event variable e, it is an abbreviated object from the StorageEvent obje
 | Property | Type | Description|
 | -------- | ------ | ------------------------------------------------------------ |
 | key| `string` | The key to store the value, modify, delete according to it |
-| oldValue | Partial<any> \| null \| string| last value |
-| newValue | Partial<any> \| null \| string| current new value |
+| oldValue | `Partial<any> | null | string | number` | last value |
+| newValue | `Partial<any> | null | string | number` | current new value |
 | type| `string` | event type |
+| native | `StorageEvent` | native event |
 
 ### unsubscribe
 
@@ -123,6 +130,14 @@ const someName = (e)=>{}
 store.subscribe("test",someName)
 store.unsubscribe("test",someName) // ⚠️Note that unsubscribe cannot be an anonymous method
 store.unsubscribe("test") // ⚠️Note that all subscriptions to test will be cancelled including anonymous functions
+```
+
+### getUsed
+
+Get the storage usage of the store
+
+```ts
+store.getUsed() // return `0.111 KB`
 ```
 
 ## Compatibility
@@ -138,3 +153,10 @@ source：[localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/
 `JSON.stringify(localStorage).length` How much capacity is currently occupied
 
 [Detect the upper limit of localstore capacity](https://arty.name/localstorage.html)
+
+## 🌈Version changes
+
+- v1 mainly has a `localStorage` that can set the expiration time and monitor key value changes
+- v2 mainly adjusts the enhanced definition of `typescript` types
+- v3 mainly enhances the return value parameter of the standard monitoring callback function, optimizes and adjusts the type definition
+- ...introducing namespaces, and sessions, etc.
