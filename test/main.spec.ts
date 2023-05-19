@@ -120,4 +120,8 @@ describe("local-store-pro", () => {
     store("mm", 0)
     store("str", 98).get("98k")
   })
+  // API
+  test("getUsed()", () => {
+    expect(store.getUsed().includes("KB")).toBeTruthy()
+  })
 })

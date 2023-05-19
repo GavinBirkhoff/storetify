@@ -14,6 +14,7 @@ declare class NextStorage {
     getHasBindWindow(): boolean;
     setNamespace(space: string): void;
     getNamespace(): string;
+    getUsed(): string;
     setStore<T extends Storage>(store: T): void;
     protected getStore(): Storage;
     set(key: string, value: NextStorageEventValue, expires?: number): this;
@@ -22,9 +23,9 @@ declare class NextStorage {
     has(key: string): boolean;
     publish(observers: StoreListener[] | string, e: StorageEvent, force?: boolean, defaultKey?: string | null): void;
     publishAll(e: StorageEvent): void;
-    subscribe(key: string, action: StoreListener): this;
+    subscribe(key: string, listener: StoreListener): this;
     getObserver(key: string): StoreListener[];
-    unsubscribe(keys?: string | string[], action?: StoreListener): void;
+    unsubscribe(keys?: string | string[], listener?: StoreListener): void;
     remove(key: string): this;
     clear(): void;
 }

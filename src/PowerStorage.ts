@@ -39,6 +39,11 @@ class NextStorage {
     return this.namespace
   }
 
+  public getUsed() {
+    const storageUsed = JSON.stringify(this.store).length / 1024
+    return storageUsed.toFixed(3) + " KB"
+  }
+
   public setStore<T extends Storage>(store: T) {
     this.store = store
   }
@@ -97,7 +102,9 @@ class NextStorage {
     force = false,
     defaultKey: string | null = null,
   ) {
+    // force publish without ask observers
     if (!observers && !force && !this.has(observers)) return
+
     if (Array.isArray(observers)) {
       each(observers, e, defaultKey)
     } else {

@@ -22,6 +22,7 @@ export interface StoreStage {
     clear: () => void;
     subscribe: (key: string, action: (e?: StoreProEvent) => void) => void;
     unsubscribe: (keys: string | string[], action?: (e?: StoreProEvent) => void) => void;
+    getUsed: () => string;
 }
 export interface LocalStoreStage extends Partial<StoreStage> {
     <T, K extends StoreArgument<T>>(...rest: K): LocalStoreStageMap[K["length"]];
