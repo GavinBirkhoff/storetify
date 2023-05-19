@@ -115,7 +115,7 @@ describe("local-store-pro", () => {
     )
     store.subscribe("str", () => {})
     store.subscribe("str", e => {
-      e.newValue, e.oldValue
+      e?.newValue, e?.oldValue
     })
     store("mm", 0)
     store("str", 98).get("98k")
