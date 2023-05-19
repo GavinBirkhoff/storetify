@@ -2,25 +2,19 @@ import NextStorage from "../PowerStorage"
 
 export type StorageEventKey = string | null
 export type StorageEventValue = string | null
-export type NextStorageEventValue = Partial<any> | null | string
-export type NextStorageEventType = "storage" | "setItemEvent"
+export type NextStorageEventValue = Partial<any> | any[] | null | string | number
+
 export type StoreArgument<T> = [string?, T?, number?]
-export type StoreListener = (e?: DispatchPublishEvent) => void
+export type StoreListener = <T extends StoreProEvent>(e?: T) => void
 
 export type LocalStoreStageMap = [null, NextStorageEventValue, NextStorage, NextStorage]
 
 export type NextStorageEventValueOrNextStorage<K extends { length: number }> = LocalStoreStageMap[K["length"]]
-export interface DispatchPublishEvent extends Partial<Omit<StorageEvent, "newValue" | "oldValue">> {
-  key: StorageEventKey
-  newValue: NextStorageEventValue
-  oldValue: NextStorageEventValue
-  type: NextStorageEventType
-}
 
-export interface IDispatchEvent extends Event {
-  key: StorageEventKey
+export interface StoreProEvent extends Omit<StorageEvent, "newValue" | "oldValue"> {
   newValue: NextStorageEventValue
   oldValue: NextStorageEventValue
+  native: StorageEvent
 }
 
 export interface StoreStage {
@@ -30,8 +24,8 @@ export interface StoreStage {
   remove: (key: string) => void
   has: (key: string) => boolean
   clear: () => void
-  subscribe: (key: string, action: (e: DispatchPublishEvent) => void) => void
-  unsubscribe: (keys: string | string[], action?: (e: DispatchPublishEvent) => void) => void
+  subscribe: (key: string, action: (e?: StoreProEvent) => void) => void
+  unsubscribe: (keys: string | string[], action?: (e?: StoreProEvent) => void) => void
 }
 
 export interface LocalStoreStage extends Partial<StoreStage> {

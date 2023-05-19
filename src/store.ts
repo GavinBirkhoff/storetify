@@ -1,14 +1,5 @@
 import NextStorage from "./PowerStorage"
-import {
-  DispatchPublishEvent,
-  LocalStorePro,
-  LocalStoreStage,
-  StorageEventValue,
-  NextStorageEventValue,
-  LocalStoreStageMap,
-  StoreArgument,
-} from "./type"
-import { jsonParse } from "./utils"
+import { LocalStorePro, LocalStoreStage, LocalStoreStageMap, StoreArgument } from "./type"
 
 const storage = NextStorage.getInstance()
 
@@ -38,31 +29,24 @@ function init(): LocalStorePro {
     }
   })
   store.localStore = storage
-  function dispatchPublish(ev: DispatchPublishEvent) {
-    const { key, newValue, oldValue, type } = ev
-    if (newValue !== oldValue) {
-      if (type === "storage") {
-        const parseNewValue = jsonParse(newValue as StorageEventValue)?.value ?? null
-        const parseOldValue = jsonParse(oldValue as StorageEventValue)?.value ?? null
-        storage.publish(key as string, { key, newValue: parseNewValue, oldValue: parseOldValue, type }, true)
-        return
-      }
-      storage.publish(key as string, { key, newValue, oldValue, type }, true)
+  function dispatchPublish(ev: StorageEvent) {
+    const { key, newValue, oldValue, isTrusted } = ev
+    if (key !== null && newValue !== oldValue) {
+      storage.publish(key, ev, true)
+      return
     }
-    if (key === null && newValue === null && oldValue === null && type === "storage") {
-      storage.publishAll({ key, newValue, oldValue, type })
+    if (key === null && newValue === null && oldValue === null) {
+      storage.publishAll(ev)
     }
   }
   if (!storage.getHasBindWindow()) {
     storage.setHasBindWindow(true)
-    const setItemEventListener = (e: Event) => {
-      dispatchPublish(e as DispatchPublishEvent)
+
+    const handleStorageChange = (e: StorageEvent) => {
+      dispatchPublish(e)
     }
-    const storageListener = (e: StorageEvent) => {
-      dispatchPublish(e as DispatchPublishEvent)
-    }
-    window.addEventListener("setItemEvent", setItemEventListener)
-    window.addEventListener("storage", storageListener)
+
+    window.addEventListener("storage", handleStorageChange)
   }
   return store as LocalStorePro
 }

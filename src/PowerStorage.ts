@@ -1,5 +1,5 @@
-import { DispatchPublishEvent, NextStorageEventValue, StoreListener } from "./type"
-import { dispatchStorageEvent, each, jsonParse } from "./utils"
+import { NextStorageEventValue, StoreListener } from "./type"
+import { dispatchStorageEvent, each, isValidKey, jsonParse } from "./utils"
 /**
  * NextStorage
  * Next localStorage
@@ -48,11 +48,11 @@ class NextStorage {
   }
 
   public set(key: string, value: NextStorageEventValue, expires?: number) {
+    isValidKey(key)
     const val = JSON.stringify({ value, expires: expires ? expires * 1000 + Date.now() : expires })
     try {
-      const newValue = value
-      const oldValue = this.get(key)
-      dispatchStorageEvent({ key, newValue, oldValue, type: "setItemEvent" })
+      const oldValue = this.getItem(key)
+      dispatchStorageEvent({ key, newValue: val, oldValue, type: "storage" })
     } finally {
       this.store.setItem(key, val)
     }
@@ -72,25 +72,43 @@ class NextStorage {
     return null
   }
 
+  public getItem(key: string): string | null {
+    const val = this.store.getItem(key) ?? null
+    if (val === null) {
+      return val
+    }
+    const value = jsonParse(val)
+    if (!value.expires || Date.now() <= value.expires) {
+      return val
+    }
+    this.remove(key)
+    return null
+  }
+
   public has(key: string): boolean {
     const val = this.store.getItem(key)
     if (val === null) return false
     return true
   }
 
-  public publish(key: string | StoreListener[], e: DispatchPublishEvent, force = false) {
-    if (!key && !force && !this.has(key)) return
-    if (Array.isArray(key)) {
-      each(key, e)
+  public publish(
+    observers: StoreListener[] | string,
+    e: StorageEvent,
+    force = false,
+    defaultKey: string | null = null,
+  ) {
+    if (!observers && !force && !this.has(observers)) return
+    if (Array.isArray(observers)) {
+      each(observers, e, defaultKey)
     } else {
-      const channels = this.getObserver(key) ?? []
-      each(channels, e)
+      const storeListeners = this.getObserver(observers)
+      each(storeListeners, e, defaultKey)
     }
   }
 
-  public publishAll(e: DispatchPublishEvent) {
-    this.observers.forEach((item: StoreListener[]) => {
-      this.publish(item, e, true)
+  public publishAll(e: StorageEvent) {
+    this.observers.forEach((item: StoreListener[], key: string) => {
+      this.publish(item, e, true, key)
     })
   }
 
@@ -106,8 +124,8 @@ class NextStorage {
     return this
   }
 
-  public getObserver(key: string): StoreListener[] | undefined {
-    return this.observers.get(key)
+  public getObserver(key: string): StoreListener[] {
+    return this.observers.get(key) ?? []
   }
 
   public unsubscribe(keys?: string | string[], action?: StoreListener) {
@@ -129,8 +147,8 @@ class NextStorage {
   }
 
   public remove(key: string) {
-    const oldValue = jsonParse(this.store.getItem(key) as string)?.value ?? null
-    dispatchStorageEvent({ key, newValue: null, oldValue, type: "setItemEvent" })
+    const oldValue = this.store.getItem(key) ?? null
+    dispatchStorageEvent({ key, newValue: null, oldValue, type: "storage" })
     this.unsubscribe(key)
     this.store.removeItem(key)
     return this
