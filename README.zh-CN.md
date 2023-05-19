@@ -6,7 +6,7 @@
 
 ## ✨ Features
 
-- 更好的去使用localStorage, 也认为是下一代的localStorage
+- 比较好的localStorage, 也认为是下一代的localStorage
 - 易学易用
 - 支持数据的过期时间
 - 支持数据变化的监听
@@ -17,6 +17,12 @@
 ```bash
 # npm 安装
 npm install local-store-pro
+
+# yarn 安装
+yarn add local-store-pro
+
+#pnpm 安装
+pnpm add local-store-pro
 ```
 
 ## 🏗️ 构建
@@ -110,9 +116,10 @@ store.subscribe("test",(e)=>{})
 | Property | Type | Description|
 | -------- | ------ | ------------------------------------------------------------ |
 | key| `string` | 存储值的键，根据其修改、删除|
-| oldValue | Partial<any> \| null \| string| 上一次的值 |
-| newValue | Partial<any> \| null \| string| 当前新的值 |
+| oldValue | `Partial<any> \| null \| string | number` | 上一次的值 |
+| newValue | `Partial<any> \| null \| string  number` | 当前新的值 |
 | type| `string` | 事件类型 |
+| native | *StorageEvent* | 原生事件 |
 
 ### unsubscribe
 
