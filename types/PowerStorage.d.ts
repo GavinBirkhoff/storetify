@@ -1,4 +1,4 @@
-import { DispatchPublishEvent, NextStorageEventValue, StoreListener } from "./type";
+import { NextStorageEventValue, StoreListener } from "./type";
 /**
  * NextStorage
  * Next localStorage
@@ -18,11 +18,12 @@ declare class NextStorage {
     protected getStore(): Storage;
     set(key: string, value: NextStorageEventValue, expires?: number): this;
     get(key: string): NextStorageEventValue;
+    getItem(key: string): string | null;
     has(key: string): boolean;
-    publish(key: string | StoreListener[], e: DispatchPublishEvent, force?: boolean): void;
-    publishAll(e: DispatchPublishEvent): void;
+    publish(observers: StoreListener[] | string, e: StorageEvent, force?: boolean, defaultKey?: string | null): void;
+    publishAll(e: StorageEvent): void;
     subscribe(key: string, action: StoreListener): this;
-    getObserver(key: string): StoreListener[] | undefined;
+    getObserver(key: string): StoreListener[];
     unsubscribe(keys?: string | string[], action?: StoreListener): void;
     remove(key: string): this;
     clear(): void;
