@@ -64,6 +64,13 @@
             store('pre-key', '10000')
         }, 10000)
         console.log(store.getUsed());
+        store.set('foo', 'foo')
+        const funcName = (ev) => {
+            // throw Error('foo error')
+        }
+        store.subscribe('foo', funcName)
+        store.set('foo', undefined)
+        // store.remove('foo')
     </script>
 
 </body>
