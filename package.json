@@ -8,6 +8,7 @@
   "unpkg": "./lib/local-store-pro.min.js",
   "types": "./lib/local-store-pro.d.ts",
   "scripts": {
+    "init": "npm install && npm run build",
     "lint": "eslint src --ext .js,.ts",
     "test": "jest --no-cache",
     "build": "npm run build:es & npm run build:lib",
