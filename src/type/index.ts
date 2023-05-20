@@ -5,7 +5,7 @@ export type StorageEventValue = string | null
 export type NextStorageEventValue = Partial<any> | any[] | null | string | number
 
 export type StoreArgument<T> = [string?, T?, number?]
-export type StoreListener = <T extends StoreProEvent>(e?: T) => void
+export type StoreListener = <T extends StoreProEvent>(e: T) => void
 
 export type LocalStoreStageMap = [null, NextStorageEventValue, NextStorage, NextStorage]
 
@@ -19,13 +19,13 @@ export interface StoreProEvent extends Omit<StorageEvent, "newValue" | "oldValue
 
 export interface StoreStage {
   localStore: NextStorage
-  set: (key: string, value: Partial<any> | string | null, expires?: number) => void
-  get: (key: string) => null | Partial<any> | string
+  set: (key: string, value: NextStorageEventValue, expires?: number) => void
+  get: (key: string) => NextStorageEventValue
   remove: (key: string) => void
   has: (key: string) => boolean
   clear: () => void
-  subscribe: (key: string, action: (e?: StoreProEvent) => void) => void
-  unsubscribe: (keys: string | string[], action?: (e?: StoreProEvent) => void) => void
+  subscribe: (key: string, listener: (e: StoreProEvent) => void) => void
+  unsubscribe: (keys: string | string[], listener?: () => void) => void
   getUsed: () => string
 }
 
