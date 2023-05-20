@@ -1,6 +1,12 @@
-[English](https://github.com/GavinBirkhoff/local-store-pro/blob/main/README.md) | 简体中文
+<div align="center">
 
-![license](https://img.shields.io/github/license/gavinbirkhoff/local-store-pro) ![release](https://img.shields.io/github/release/gavinbirkhoff/local-store-pro.svg)
+![Build Status](https://github.com/GavinBirkhoff/local-store-pro/actions/workflows/node-ci.yml/badge.svg)
+![license](https://img.shields.io/github/license/gavinbirkhoff/local-store-pro)
+![release](https://img.shields.io/github/release/gavinbirkhoff/local-store-pro.svg)
+
+</div>
+
+[English](https://github.com/GavinBirkhoff/local-store-pro/blob/main/README.md) | 简体中文
 
 🦄本地存储localStorage的封装，提供过期时间设置和订阅功能，提供简单API使用，没有依赖，压缩只有 3.81KB(gzipped: 1.39KB)。
 
