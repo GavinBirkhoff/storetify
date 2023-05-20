@@ -45,7 +45,9 @@ export function each(funcs: StoreListener[], ev: StorageEvent, defaultKey: strin
       try {
         func(mutationalStorageEvent)
       } catch (error) {
-        console.warn(`has an exception in your ${func.name}()`)
+        console.warn(`has an exception in your ${func.name || "anonymous function"}( ev ){
+          ${error}
+        }`)
       }
     }
   })
@@ -53,7 +55,7 @@ export function each(funcs: StoreListener[], ev: StorageEvent, defaultKey: strin
 
 export function isValidKey(key: string) {
   if (typeof key !== "string") {
-    console.warn("store failed, entry a valid string key")
+    console.warn("store failed, entry a valid string key.")
     return
   }
 }

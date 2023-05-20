@@ -40,7 +40,7 @@ class NextStorage {
   }
 
   public getUsed() {
-    const storageUsed = JSON.stringify(this.store).length / 1024
+    const storageUsed = JSON.stringify(this.getStore()).length / 1024
     return storageUsed.toFixed(3) + " KB"
   }
 
@@ -59,13 +59,13 @@ class NextStorage {
       const oldValue = this.getItem(key)
       dispatchStorageEvent({ key, newValue: val, oldValue, type: "storage" })
     } finally {
-      this.store.setItem(key, val)
+      this.getStore().setItem(key, val)
     }
     return this
   }
 
   public get(key: string): NextStorageEventValue {
-    const val = this.store.getItem(key) ?? null
+    const val = this.getStore().getItem(key) ?? null
     if (val === null) {
       return val
     }
@@ -78,7 +78,7 @@ class NextStorage {
   }
 
   public getItem(key: string): string | null {
-    const val = this.store.getItem(key) ?? null
+    const val = this.getStore().getItem(key) ?? null
     if (val === null) {
       return val
     }
@@ -86,12 +86,12 @@ class NextStorage {
     if (!value.expires || Date.now() <= value.expires) {
       return val
     }
-    this.remove(key)
+    // this.remove(key) only read value
     return null
   }
 
   public has(key: string): boolean {
-    const val = this.store.getItem(key)
+    const val = this.getStore().getItem(key)
     if (val === null) return false
     return true
   }
@@ -154,17 +154,17 @@ class NextStorage {
   }
 
   public remove(key: string) {
-    const oldValue = this.store.getItem(key) ?? null
+    const oldValue = this.getStore().getItem(key) ?? null
     dispatchStorageEvent({ key, newValue: null, oldValue, type: "storage" })
     this.unsubscribe(key)
-    this.store.removeItem(key)
+    this.getStore().removeItem(key)
     return this
   }
 
   public clear() {
     dispatchStorageEvent({ key: null, newValue: null, oldValue: null, type: "storage" })
     this.unsubscribe()
-    this.store.clear()
+    this.getStore().clear()
   }
 }
 
