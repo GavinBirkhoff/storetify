@@ -1,6 +1,7 @@
 <div align="center">
 
 ![Build Status](https://github.com/GavinBirkhoff/local-store-pro/actions/workflows/node-ci.yml/badge.svg)
+[![codecov](https://codecov.io/github/GavinBirkhoff/local-store-pro/branch/main/graph/badge.svg)](https://codecov.io/github/GavinBirkhoff/local-store-pro)
 ![license](https://img.shields.io/github/license/gavinbirkhoff/local-store-pro)
 ![release](https://img.shields.io/github/release/gavinbirkhoff/local-store-pro.svg)
 
@@ -165,4 +166,4 @@ source：[localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/
 - v1 mainly has a `localStorage` that can set the expiration time and monitor key value changes
 - v2 mainly adjusts the enhanced definition of `typescript` types
 - v3 mainly enhances the return value parameter of the standard monitoring callback function, optimizes and adjusts the type definition
-- ...introducing namespaces, and sessions, etc.
+- v?...introducing namespaces, and sessions, etc.
