@@ -120,11 +120,15 @@ store.subscribe("test",(e)=>{})
 
 对于事件变量e，是一个来自StorageEvent对象的简略对象，提供了一些实用的属性，可以很好的观察键值对的变化，如下表：
 
+```ts
+type NextStorageEventValue = Partial<any> | any[] | null | string | number
+```
+
 | Property | Type | Description|
 | -------- | ------ | ------------------------------------------------------------ |
 | key| `string` | 存储值的键，根据其修改、删除|
-| oldValue | `Partial<any> | null | string | number` | 上一次的值 |
-| newValue | `Partial<any> | null | string | number` | 当前新的值 |
+| oldValue | `NextStorageEventValue` | 上一次的值 |
+| newValue | `NextStorageEventValue` | 当前新的值 |
 | type| `string` | 事件类型 |
 | native | `StorageEvent` | 原生事件 |
 

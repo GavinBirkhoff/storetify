@@ -120,11 +120,15 @@ store.subscribe("test",(e)=>{})
 
 For the event variable e, it is an abbreviated object from the StorageEvent object, which provides some practical properties, which can be used to observe the changes of key-value pairs well, as shown in the following table：
 
+```ts
+type NextStorageEventValue = Partial<any> | any[] | null | string | number
+```
+
 | Property | Type | Description|
 | -------- | ------ | ------------------------------------------------------------ |
 | key| `string` | The key to store the value, modify, delete according to it |
-| oldValue | `Partial<any> | null | string | number` | last value |
-| newValue | `Partial<any> | null | string | number` | current new value |
+| oldValue | `NextStorageEventValue` | last value |
+| newValue | `NextStorageEventValue` | current new value |
 | type| `string` | event type |
 | native | `StorageEvent` | native event |
 
