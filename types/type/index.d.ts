@@ -1,10 +1,11 @@
 import NextStorage from "../PowerStorage";
 export declare type StorageEventKey = string | null;
 export declare type StorageEventValue = string | null;
+export declare type NextStorageValue = Partial<any> | any[] | null | string | number;
 export declare type NextStorageEventValue = Partial<any> | any[] | null | string | number;
 export declare type StoreArgument<T> = [string?, T?, number?];
 export declare type StoreListener = <T extends StoreProEvent>(e: T) => void;
-export declare type LocalStoreStageMap = [null, NextStorageEventValue, NextStorage, NextStorage];
+export declare type LocalStoreStageMap = [null, NextStorageValue, NextStorage, NextStorage];
 export declare type NextStorageEventValueOrNextStorage<K extends {
     length: number;
 }> = LocalStoreStageMap[K["length"]];
@@ -15,8 +16,8 @@ export interface StoreProEvent extends Omit<StorageEvent, "newValue" | "oldValue
 }
 export interface StoreStage {
     localStore: NextStorage;
-    set: (key: string, value: NextStorageEventValue, expires?: number) => void;
-    get: (key: string) => NextStorageEventValue;
+    set: (key: string, value: NextStorageValue, expires?: number) => void;
+    get: (key: string) => NextStorageValue;
     remove: (key: string) => void;
     has: (key: string) => boolean;
     clear: () => void;

@@ -1,4 +1,4 @@
-import { NextStorageEventValue, StoreListener } from "./type";
+import { NextStorageValue, StoreListener } from "./type";
 /**
  * NextStorage
  * Next localStorage
@@ -17,8 +17,8 @@ declare class NextStorage {
     getUsed(): string;
     setStore<T extends Storage>(store: T): void;
     protected getStore(): Storage;
-    set(key: string, value: NextStorageEventValue, expires?: number): this;
-    get(key: string): NextStorageEventValue;
+    set(key: string, value: NextStorageValue, expires?: number): this;
+    get(key: string): NextStorageValue;
     getItem(key: string): string | null;
     has(key: string): boolean;
     publish(observers: StoreListener[] | string, e: StorageEvent, force?: boolean, defaultKey?: string | null): void;
