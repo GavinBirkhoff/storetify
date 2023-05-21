@@ -4,6 +4,7 @@ export {
   StoreArgument,
   StorageEventKey,
   StoreListener,
+  NextStorageValue,
   NextStorageEventValue,
   LocalStoragePro,
   LocalStoreStageMap,
