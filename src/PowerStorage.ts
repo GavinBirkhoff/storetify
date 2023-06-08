@@ -73,7 +73,8 @@ class NextStorage {
     if (!value.expires || Date.now() <= value.expires) {
       return value.value
     }
-    this.remove(key)
+    // only del store key without listeners
+    this.remove(key, true)
     return null
   }
 
@@ -153,10 +154,12 @@ class NextStorage {
     }
   }
 
-  public remove(key: string) {
+  public remove(key: string, soft?: boolean) {
     const oldValue = this.getStore().getItem(key) ?? null
     dispatchStorageEvent({ key, newValue: null, oldValue, type: "storage" })
-    this.unsubscribe(key)
+    if (soft !== true) {
+      this.unsubscribe(key)
+    }
     this.getStore().removeItem(key)
     return this
   }
