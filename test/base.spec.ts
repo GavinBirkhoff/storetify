@@ -1,4 +1,4 @@
-import store from "../src/index"
+import store, { StoreProEvent } from "../src/index"
 
 describe("local-store-pro api test", () => {
   test("test setNamespace getNamespace", () => {
@@ -63,9 +63,24 @@ describe("local-store-pro api test", () => {
     store.unsubscribe(["key1", "key2"])
   })
   test("test Exception", () => {
-    const consoleWarnSpy = jest.spyOn(console, "warn")
+    // not input message to terminal
+    const consoleWarnSpy = jest.spyOn(console, "warn").mockImplementation(() => {})
     store.set(1 as any, 1)
     expect(store(1 as any)).toBe(null)
     expect(consoleWarnSpy).toHaveBeenCalledWith("store failed, entry a valid string key.")
   })
+  test("test subscribe and expires", done => {
+    store("token-6823", "xxxx", 5)
+    const callFun = (ev: StoreProEvent) => {
+      if (ev.newValue) {
+        done()
+      }
+    }
+    store.subscribe("token-6823", callFun)
+    setTimeout(() => {
+      const token = store("token-6823")
+      expect(token).toBeNull()
+      store.set("token-6823", "xxxx", 10)
+    }, 5000)
+  }, 7000)
 })
