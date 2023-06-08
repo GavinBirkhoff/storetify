@@ -1,6 +1,6 @@
 {
   "name": "local-store-pro",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Better localStorage, subscribable localStorage, expirable localStorage",
   "main": "./lib/local-store-pro.cjs.js",
   "module": "./lib/local-store-pro.esm.js",
@@ -14,8 +14,8 @@
     "build": "npm run build:es & npm run build:lib",
     "build:es": "rm -rf ./dist/* && rm -rf ./types/* && tsc",
     "build:lib": "rm -rf ./lib/* && rollup -c",
-    "prepublish": "npm run test && npm run build",
-    "pub": "nrm use npm && npm publish"
+    "prepublishOnly": "npm run test && npm run build",
+    "pub": "npm publish"
   },
   "keywords": [
     "localStorage",
