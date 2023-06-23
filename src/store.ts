@@ -38,7 +38,7 @@ function init(): LocalStorePro {
     if (key === null && newValue === null && oldValue === null) {
       storage.publishAll(ev)
       // Consistent behavior with storage.clear(), while unsubscribe.
-      if (isTrusted === true) {
+      if (isTrusted !== true) {
         storage.unsubscribe()
       }
     }

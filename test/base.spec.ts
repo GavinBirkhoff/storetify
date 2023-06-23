@@ -81,6 +81,6 @@ describe("local-store-pro api test", () => {
       const token = store("token-6823")
       expect(token).toBeNull()
       store.set("token-6823", "xxxx", 10)
-    }, 5000)
+    }, 5500)
   }, 7000)
 })

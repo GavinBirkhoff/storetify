@@ -26,7 +26,7 @@ export interface StoreStage {
   has: (key: string) => boolean
   clear: () => void
   subscribe: (key: string, listener: (e: StoreProEvent) => void) => void
-  unsubscribe: (keys: string | string[], listener?: () => void) => void
+  unsubscribe: (keys: string | string[], listener?: (e: StoreProEvent) => void) => void
   getUsed: () => string
 }
 

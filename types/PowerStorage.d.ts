@@ -26,7 +26,7 @@ declare class NextStorage {
     subscribe(key: string, listener: StoreListener): this;
     getObserver(key: string): StoreListener[];
     unsubscribe(keys?: string | string[], listener?: StoreListener): void;
-    remove(key: string): this;
+    remove(key: string, soft?: boolean): this;
     clear(): void;
 }
 export default NextStorage;

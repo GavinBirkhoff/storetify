@@ -166,7 +166,8 @@ class NextStorage {
 
   public clear() {
     dispatchStorageEvent({ key: null, newValue: null, oldValue: null, type: "storage" })
-    this.unsubscribe()
+    // go dispatchPublish storage.unsubscribe()
+    // this.unsubscribe()
     this.getStore().clear()
   }
 }
