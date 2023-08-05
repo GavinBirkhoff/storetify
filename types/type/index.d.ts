@@ -18,11 +18,12 @@ export interface StoreStage {
     localStore: NextStorage;
     set: (key: string, value: NextStorageValue, expires?: number) => void;
     get: (key: string) => NextStorageValue;
-    remove: (key: string) => void;
+    remove: (key: string, soft?: boolean) => void;
     has: (key: string) => boolean;
     clear: () => void;
     subscribe: (key: string, listener: (e: StoreProEvent) => void) => void;
     unsubscribe: (keys: string | string[], listener?: (e: StoreProEvent) => void) => void;
+    getObserver(key: string): StoreListener[];
     getUsed: () => string;
 }
 export interface LocalStoreStage extends Partial<StoreStage> {

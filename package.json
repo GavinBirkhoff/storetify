@@ -1,6 +1,6 @@
 {
   "name": "local-store-pro",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "Better localStorage, subscribable localStorage, expirable localStorage",
   "main": "./lib/local-store-pro.cjs.js",
   "module": "./lib/local-store-pro.esm.js",
