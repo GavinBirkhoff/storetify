@@ -4,7 +4,7 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "eslint.enable": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll": true
+    "source.fixAll": "explicit"
   },
   "eslint.validate": ["javascript", "html", "typescript"]
 }

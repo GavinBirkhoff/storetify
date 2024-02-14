@@ -1,12 +1,12 @@
 import NextStorage from "../PowerStorage";
-export declare type StorageEventKey = string | null;
-export declare type StorageEventValue = string | null;
-export declare type NextStorageValue = Partial<any> | any[] | null | string | number;
-export declare type NextStorageEventValue = Partial<any> | any[] | null | string | number;
-export declare type StoreArgument<T> = [string?, T?, number?];
-export declare type StoreListener = <T extends StoreProEvent>(e: T) => void;
-export declare type LocalStoreStageMap = [null, NextStorageValue, NextStorage, NextStorage];
-export declare type NextStorageEventValueOrNextStorage<K extends {
+export type StorageEventKey = string | null;
+export type StorageEventValue = string | null;
+export type NextStorageValue = Partial<any> | any[] | null | string | number;
+export type NextStorageEventValue = Partial<any> | any[] | null | string | number;
+export type StoreArgument<T> = [string?, T?, number?];
+export type StoreListener = <T extends StoreProEvent>(e: T) => void;
+export type LocalStoreStageMap = [null, NextStorageValue, NextStorage, NextStorage];
+export type NextStorageEventValueOrNextStorage<K extends {
     length: number;
 }> = LocalStoreStageMap[K["length"]];
 export interface StoreProEvent extends Omit<StorageEvent, "newValue" | "oldValue"> {
@@ -32,4 +32,4 @@ export interface LocalStoreStage extends Partial<StoreStage> {
 export interface LocalStorePro extends StoreStage {
     <T, K extends StoreArgument<T>>(...rest: K): LocalStoreStageMap[K["length"]];
 }
-export declare type LocalStoragePro = NextStorage;
+export type LocalStoragePro = NextStorage;
