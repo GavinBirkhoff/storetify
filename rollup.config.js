@@ -42,7 +42,7 @@ export default [
       {
         format: "umd",
         file: `lib/${pkg.name}.min.js`,
-        name: "LocalStorePro",
+        name: "Storetify",
         noConflict: true,
         sourcemap: true,
       },

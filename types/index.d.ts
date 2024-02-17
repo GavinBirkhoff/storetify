@@ -1,3 +1,3 @@
 import store from "./store";
-export { LocalStorePro, StoreArgument, StorageEventKey, StoreListener, StoreProEvent, NextStorageValue, NextStorageEventValue, LocalStoragePro, LocalStoreStageMap, } from "./type/";
+export { Storetify, StoreArgument, StorageEventKey, StoreListener, StoretifyEvent, NextStorageValue, NextStorageEventValue, StoretifyStageMap, } from "./type/";
 export default store;

@@ -1,32 +1,32 @@
-import NextStorage from "./PowerStorage"
-import { LocalStorePro, LocalStoreStage, LocalStoreStageMap, StoreArgument, StoreStage } from "./type"
+import NextStorage from "./NextStorage"
+import { Storetify, StoretifyStage, StoretifyStageMap, StoreArgument, StoreStage } from "./type"
 
 const storage = NextStorage.getInstance()
 
-const store: LocalStoreStage = function <T, K extends StoreArgument<T>>(...rest: K): LocalStoreStageMap[K["length"]] {
+const store: StoretifyStage = function <T, K extends StoreArgument<T>>(...rest: K): StoretifyStageMap[K["length"]] {
   const len = rest.length
   const [key, value, expires] = rest
   if (len === 1 && typeof key === "string") {
-    return storage.get(key) as LocalStoreStageMap[K["length"]]
+    return storage.get(key) as StoretifyStageMap[K["length"]]
   }
   if (len >= 2 && typeof key === "string") {
     if (value === undefined) {
-      return storage.remove(key) as LocalStoreStageMap[K["length"]]
+      return storage.remove(key) as StoretifyStageMap[K["length"]]
     }
     if (typeof value === "function") {
-      return storage.set(key, value(), expires) as LocalStoreStageMap[K["length"]]
+      return storage.set(key, value(), expires) as StoretifyStageMap[K["length"]]
     }
-    return storage.set(key, value, expires) as LocalStoreStageMap[K["length"]]
+    return storage.set(key, value, expires) as StoretifyStageMap[K["length"]]
   }
-  return null as LocalStoreStageMap[K["length"]]
+  return null as StoretifyStageMap[K["length"]]
 }
 
-function init(): LocalStorePro {
+function init(): Storetify {
   const propertyNames = Object.getOwnPropertyNames(Object.getPrototypeOf(storage))
   propertyNames.forEach(key => {
     if (key !== "constructor" && key !== "getStore") {
       const value = storage[key as keyof NextStorage]
-      const storeKey = key as keyof LocalStorePro
+      const storeKey = key as keyof Storetify
       if (typeof value === "function") {
         ;(store as any)[storeKey] = value.bind(storage)
       } else {
@@ -59,7 +59,7 @@ function init(): LocalStorePro {
     window.addEventListener("storage", handleStorageChange)
   }
 
-  return store as LocalStorePro
+  return store as Storetify
 }
 
 export default init()

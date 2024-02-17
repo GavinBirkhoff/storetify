@@ -5,7 +5,7 @@ import { dispatchStorageEvent, each, isValidKey, jsonParse } from "./utils"
  * Next localStorage
  */
 class NextStorage {
-  namespace = "ts-store"
+  namespace = "storetify"
 
   protected store = localStorage
 

@@ -1,4 +1,4 @@
-import { NextStorageEventValue, StoreListener, StoreProEvent } from "./type"
+import { NextStorageEventValue, StoreListener, StoretifyEvent } from "./type"
 
 export function dispatchStorageEvent({
   key,
@@ -38,7 +38,7 @@ export function each(funcs: StoreListener[], ev: StorageEvent, defaultKey: strin
     url: ev.url,
     isTrusted: ev.isTrusted,
     native: ev,
-  } as StoreProEvent
+  } as StoretifyEvent
 
   funcs.forEach((func: StoreListener) => {
     if (typeof func === "function") {

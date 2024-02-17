@@ -1,13 +1,12 @@
 import store from "./store"
 export {
-  LocalStorePro,
+  Storetify,
   StoreArgument,
   StorageEventKey,
   StoreListener,
-  StoreProEvent,
+  StoretifyEvent,
   NextStorageValue,
   NextStorageEventValue,
-  LocalStoragePro,
-  LocalStoreStageMap,
+  StoretifyStageMap,
 } from "./type/"
 export default store

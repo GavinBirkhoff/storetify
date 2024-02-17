@@ -1,6 +1,6 @@
-import store, { StoreProEvent } from "../src/index"
+import store, { StoretifyEvent } from "../src/index"
 
-describe("local-store-pro api test", () => {
+describe("storetify api test", () => {
   test("test setNamespace getNamespace", () => {
     const namespace = "my-store"
     ;(store as any).setNamespace(namespace)
@@ -71,7 +71,7 @@ describe("local-store-pro api test", () => {
   })
   test("test subscribe and expires", done => {
     store("token-6823", "xxxx", 5)
-    const callFun = (ev: StoreProEvent) => {
+    const callFun = (ev: StoretifyEvent) => {
       if (ev.newValue) {
         done()
       }

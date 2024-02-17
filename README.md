@@ -1,13 +1,13 @@
 <div align="center">
 
-![Build Status](https://github.com/GavinBirkhoff/local-store-pro/actions/workflows/node-ci.yml/badge.svg)
-[![codecov](https://codecov.io/github/GavinBirkhoff/local-store-pro/branch/main/graph/badge.svg)](https://codecov.io/github/GavinBirkhoff/local-store-pro)
-![license](https://img.shields.io/github/license/gavinbirkhoff/local-store-pro)
-![release](https://img.shields.io/github/release/gavinbirkhoff/local-store-pro.svg)
+![Build Status](https://github.com/GavinBirkhoff/storetify/actions/workflows/node-ci.yml/badge.svg)
+[![codecov](https://codecov.io/github/GavinBirkhoff/storetify/branch/main/graph/badge.svg)](https://codecov.io/github/GavinBirkhoff/storetify)
+![license](https://img.shields.io/github/license/gavinbirkhoff/storetify)
+![release](https://img.shields.io/github/release/gavinbirkhoff/storetify.svg)
 
 </div>
 
-English | [简体中文](https://github.com/GavinBirkhoff/local-store-pro/blob/main/README.zh-CN.md)
+English | [简体中文](https://github.com/GavinBirkhoff/storetify/blob/main/README.zh-CN.md)
 
 The encapsulation of local storage localStorage, provides expiration time setting and subscription functions, provides simple API use, no dependencies, and the compression is only 3.71KB (gzipped: 1.37KB).
 
@@ -23,13 +23,13 @@ The encapsulation of local storage localStorage, provides expiration time settin
 
 ```bash
 # npm install
-npm install local-store-pro
+npm install storetify
 
 # yarn install
-yarn add local-store-pro
+yarn add storetify
 
 #pnpm install
-pnpm add local-store-pro
+pnpm add storetify
 ```
 
 ## 🏗️ Build
@@ -46,20 +46,18 @@ npm test
 
 # 🔨 Usage
 
-or manually download and include in your HTML **local-store-pro.min.js**，you can also pass [UNPKG](https://unpkg.com/local-store-pro/lib/) to download：
-
-```html
-<script src="https://unpkg.com/local-store-pro/lib/local-store-pro.min.js"></script>
-<script type="text/javascript">
-LocalStorePro("test","local-store-pro");
-</script>
+```js
+import store from 'storetify';
+store("test","storetify");
 ```
 
-or
+or manually download and include in your HTML **storetify.min.js**，you can also pass [UNPKG](https://unpkg.com/storetify/lib/) to download：
 
-```js
-import store from 'local-store-pro';
-store("test","local-store-pro");
+```html
+<script src="https://unpkg.com/storetify/lib/storetify.min.js"></script>
+<script type="text/javascript">
+Storetify("test","storetify");
+</script>
 ```
 
 ## ⚙️ API
@@ -121,7 +119,7 @@ store.subscribe("test",(e)=>{})
 For the event variable e, it is an abbreviated object from the StorageEvent object, which provides some practical properties, which can be used to observe the changes of key-value pairs well, as shown in the following table：
 
 ```ts
-type NextStorageEventValue = Partial<any> | any[] | null | string | number
+type NextStorageEventValue = Record<string, any> | any[] | null | string | number
 ```
 
 | Property | Type | Description|

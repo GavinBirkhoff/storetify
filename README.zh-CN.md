@@ -1,13 +1,13 @@
 <div align="center">
 
-![Build Status](https://github.com/GavinBirkhoff/local-store-pro/actions/workflows/node-ci.yml/badge.svg)
-[![codecov](https://codecov.io/github/GavinBirkhoff/local-store-pro/branch/main/graph/badge.svg)](https://codecov.io/github/GavinBirkhoff/local-store-pro)
-![license](https://img.shields.io/github/license/gavinbirkhoff/local-store-pro)
-![release](https://img.shields.io/github/release/gavinbirkhoff/local-store-pro.svg)
+![Build Status](https://github.com/GavinBirkhoff/storetify/actions/workflows/node-ci.yml/badge.svg)
+[![codecov](https://codecov.io/github/GavinBirkhoff/storetify/branch/main/graph/badge.svg)](https://codecov.io/github/GavinBirkhoff/storetify)
+![license](https://img.shields.io/github/license/gavinbirkhoff/storetify)
+![release](https://img.shields.io/github/release/gavinbirkhoff/storetify.svg)
 
 </div>
 
-[English](https://github.com/GavinBirkhoff/local-store-pro/blob/main/README.md) | 简体中文
+[English](https://github.com/GavinBirkhoff/storetify/blob/main/README.md) | 简体中文
 
 🦄本地存储localStorage的封装，提供过期时间设置和订阅功能，提供简单API使用，没有依赖，压缩只有 3.81KB(gzipped: 1.39KB)。
 
@@ -23,13 +23,13 @@
 
 ```bash
 # npm 安装
-npm install local-store-pro
+npm install storetify
 
 # yarn 安装
-yarn add local-store-pro
+yarn add storetify
 
 #pnpm 安装
-pnpm add local-store-pro
+pnpm add storetify
 ```
 
 ## 🏗️ 构建
@@ -46,20 +46,18 @@ npm test
 
 # 🔨 使用
 
-或者在您的HTML中手动下载并引入 **local-store-pro.min.js**，你也可以通过 [UNPKG](https://unpkg.com/local-store-pro/lib/) 进行下载：
-
-```html
-<script src="https://unpkg.com/local-store-pro/lib/local-store-pro.min.js"></script>
-<script type="text/javascript">
-LocalStorePro("test","local-store-pro");
-</script>
+```js
+import store from 'storetify';
+store("test","storetify");
 ```
 
-or
+或者在您的HTML中手动下载并引入 **storetify.min.js**，你也可以通过 [UNPKG](https://unpkg.com/storetify/lib/) 进行下载：
 
-```js
-import store from 'local-store-pro';
-store("test","local-store-pro");
+```html
+<script src="https://unpkg.com/storetify/lib/storetify.min.js"></script>
+<script type="text/javascript">
+Storetify("test","storetify");
+</script>
 ```
 
 # ⚙️ API
@@ -121,7 +119,7 @@ store.subscribe("test",(e)=>{})
 对于事件变量e，是一个来自StorageEvent对象的简略对象，提供了一些实用的属性，可以很好的观察键值对的变化，如下表：
 
 ```ts
-type NextStorageEventValue = Partial<any> | any[] | null | string | number
+type NextStorageEventValue = Record<string, any> | any[] | null | string | number
 ```
 
 | Property | Type | Description|

@@ -1,12 +1,12 @@
 {
-  "name": "storeotify",
+  "name": "storetify",
   "version": "1.0.0",
   "description": "Better localStorage, subscribable localStorage, expirable localStorage",
-  "main": "./lib/storeotify.cjs.js",
-  "module": "./lib/storeotify.esm.js",
-  "browser": "./lib/storeotify.min.js",
-  "unpkg": "./lib/storeotify.min.js",
-  "types": "./lib/storeotify.d.ts",
+  "main": "./lib/storetify.cjs.js",
+  "module": "./lib/storetify.esm.js",
+  "browser": "./lib/storetify.min.js",
+  "unpkg": "./lib/storetify.min.js",
+  "types": "./lib/storetify.d.ts",
   "scripts": {
     "init": "npm install && npm run build",
     "lint": "eslint src --ext .js,.ts",
@@ -49,9 +49,9 @@
     ]
   },
   "bugs": {
-    "url": "https://github.com/GavinBirkhoff/storeotify/issues"
+    "url": "https://github.com/GavinBirkhoff/storetify/issues"
   },
-  "homepage": "https://github.com/GavinBirkhoff/storeotify#readme",
+  "homepage": "https://github.com/GavinBirkhoff/storetify#readme",
   "devDependencies": {
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^8.3.3",

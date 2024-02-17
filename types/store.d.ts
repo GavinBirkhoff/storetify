@@ -1,3 +1,3 @@
-import { LocalStorePro } from "./type";
-declare const _default: LocalStorePro;
+import { Storetify } from "./type";
+declare const _default: Storetify;
 export default _default;
