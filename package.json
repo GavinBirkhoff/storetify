@@ -1,12 +1,12 @@
 {
-  "name": "local-store-pro",
-  "version": "3.0.3",
+  "name": "storeotify",
+  "version": "1.0.0",
   "description": "Better localStorage, subscribable localStorage, expirable localStorage",
-  "main": "./lib/local-store-pro.cjs.js",
-  "module": "./lib/local-store-pro.esm.js",
-  "browser": "./lib/local-store-pro.min.js",
-  "unpkg": "./lib/local-store-pro.min.js",
-  "types": "./lib/local-store-pro.d.ts",
+  "main": "./lib/storeotify.cjs.js",
+  "module": "./lib/storeotify.esm.js",
+  "browser": "./lib/storeotify.min.js",
+  "unpkg": "./lib/storeotify.min.js",
+  "types": "./lib/storeotify.d.ts",
   "scripts": {
     "init": "npm install && npm run build",
     "lint": "eslint src --ext .js,.ts",
@@ -49,10 +49,11 @@
     ]
   },
   "bugs": {
-    "url": "https://github.com/GavinBirkhoff/local-store-pro/issues"
+    "url": "https://github.com/GavinBirkhoff/storeotify/issues"
   },
-  "homepage": "https://github.com/GavinBirkhoff/local-store-pro#readme",
+  "homepage": "https://github.com/GavinBirkhoff/storeotify#readme",
   "devDependencies": {
+    "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^8.3.3",
     "@types/jest": "^28.1.3",
     "@typescript-eslint/eslint-plugin": "^5.30.0",
@@ -72,7 +73,6 @@
     "rollup-plugin-filesize": "^9.1.2",
     "rollup-plugin-license": "^2.8.1",
     "rollup-plugin-sourcemaps": "^0.6.3",
-    "rollup-plugin-terser": "^7.0.2",
     "ts-jest": "^28.0.5",
     "tslib": "^1.14.1",
     "typescript": "^4.7.4"

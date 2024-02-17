@@ -5,13 +5,13 @@ import { dispatchStorageEvent, each, isValidKey, jsonParse } from "./utils"
  * Next localStorage
  */
 class NextStorage {
-  namespace = "local-store-pro"
+  namespace = "ts-store"
 
   protected store = localStorage
 
   protected observers = new Map()
 
-  protected hasBindWindow = false
+  protected windowEventStorage = false
 
   // eslint-disable-next-line no-use-before-define
   protected static storage: NextStorage | null = null
@@ -23,12 +23,12 @@ class NextStorage {
     return NextStorage.storage
   }
 
-  public setHasBindWindow(e: boolean) {
-    this.hasBindWindow = e
+  public bindWindowEventStorage(b: boolean) {
+    this.windowEventStorage = b
   }
 
-  public getHasBindWindow() {
-    return this.hasBindWindow
+  public hasBindWindowEventStorage() {
+    return this.windowEventStorage
   }
 
   public setNamespace(space: string) {

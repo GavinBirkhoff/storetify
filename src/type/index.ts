@@ -19,7 +19,7 @@ export interface StoreProEvent extends Omit<StorageEvent, "newValue" | "oldValue
 }
 
 export interface StoreStage {
-  localStore: NextStorage
+  storage: NextStorage
   set: (key: string, value: NextStorageValue, expires?: number) => void
   get: (key: string) => NextStorageValue
   remove: (key: string, soft?: boolean) => void

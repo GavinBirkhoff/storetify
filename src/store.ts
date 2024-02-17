@@ -1,5 +1,5 @@
 import NextStorage from "./PowerStorage"
-import { LocalStorePro, LocalStoreStage, LocalStoreStageMap, StoreArgument } from "./type"
+import { LocalStorePro, LocalStoreStage, LocalStoreStageMap, StoreArgument, StoreStage } from "./type"
 
 const storage = NextStorage.getInstance()
 
@@ -22,13 +22,19 @@ const store: LocalStoreStage = function <T, K extends StoreArgument<T>>(...rest:
 }
 
 function init(): LocalStorePro {
-  Object.entries(Object.getPrototypeOf(storage)).forEach(item => {
-    const [key, value] = item
+  const propertyNames = Object.getOwnPropertyNames(Object.getPrototypeOf(storage))
+  propertyNames.forEach(key => {
     if (key !== "constructor" && key !== "getStore") {
-      ;(<any>store)[key] = (value as any).bind(storage)
+      const value = storage[key as keyof NextStorage]
+      const storeKey = key as keyof LocalStorePro
+      if (typeof value === "function") {
+        ;(store as any)[storeKey] = value.bind(storage)
+      } else {
+        // store[storeKey] = value
+      }
     }
   })
-  store.localStore = storage
+  store.storage = storage
   function dispatchPublish(ev: StorageEvent) {
     const { key, newValue, oldValue, isTrusted } = ev
     if (key !== null && newValue !== oldValue) {
@@ -43,8 +49,8 @@ function init(): LocalStorePro {
       }
     }
   }
-  if (!storage.getHasBindWindow()) {
-    storage.setHasBindWindow(true)
+  if (!storage.hasBindWindowEventStorage()) {
+    storage.bindWindowEventStorage(true)
 
     const handleStorageChange = (e: StorageEvent) => {
       dispatchPublish(e)
@@ -52,6 +58,7 @@ function init(): LocalStorePro {
 
     window.addEventListener("storage", handleStorageChange)
   }
+
   return store as LocalStorePro
 }
 

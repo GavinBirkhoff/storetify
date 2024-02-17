@@ -7,11 +7,11 @@ declare class NextStorage {
     namespace: string;
     protected store: Storage;
     protected observers: Map<any, any>;
-    protected hasBindWindow: boolean;
+    protected windowEventStorage: boolean;
     protected static storage: NextStorage | null;
     static getInstance(): NextStorage;
-    setHasBindWindow(e: boolean): void;
-    getHasBindWindow(): boolean;
+    bindWindowEventStorage(b: boolean): void;
+    hasBindWindowEventStorage(): boolean;
     setNamespace(space: string): void;
     getNamespace(): string;
     getUsed(): string;
