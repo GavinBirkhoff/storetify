@@ -5,8 +5,8 @@ export {
   StorageEventKey,
   StoreListener,
   StoretifyEvent,
-  NextStorageValue,
-  NextStorageEventValue,
+  StoretifyValue,
+  StoretifyEventValue,
   StoretifyStageMap,
 } from "./type/"
 export default store

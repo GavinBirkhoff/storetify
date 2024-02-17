@@ -1,4 +1,4 @@
-import { NextStorageValue, StoreListener } from "./type"
+import { StoretifyValue, StoreListener } from "./type"
 import { dispatchStorageEvent, each, isValidKey, jsonParse } from "./utils"
 /**
  * NextStorage
@@ -52,7 +52,7 @@ class NextStorage {
     return this.store
   }
 
-  public set(key: string, value: NextStorageValue, expires?: number) {
+  public set(key: string, value: StoretifyValue, expires?: number) {
     isValidKey(key)
     const val = JSON.stringify({ value, expires: expires ? expires * 1000 + Date.now() : expires })
     try {
@@ -64,7 +64,7 @@ class NextStorage {
     return this
   }
 
-  public get(key: string): NextStorageValue {
+  public get(key: string): StoretifyValue {
     const val = this.getStore().getItem(key) ?? null
     if (val === null) {
       return val

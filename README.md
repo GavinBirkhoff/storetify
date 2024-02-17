@@ -119,14 +119,14 @@ store.subscribe("test",(e)=>{})
 For the event variable e, it is an abbreviated object from the StorageEvent object, which provides some practical properties, which can be used to observe the changes of key-value pairs well, as shown in the following table：
 
 ```ts
-type NextStorageEventValue = Record<string, any> | any[] | null | string | number
+type StoretifyEventValue = Record<string, any> | any[] | null | string | number
 ```
 
 | Property | Type | Description|
 | -------- | ------ | ------------------------------------------------------------ |
 | key| `string` | The key to store the value, modify, delete according to it |
-| oldValue | `NextStorageEventValue` | last value |
-| newValue | `NextStorageEventValue` | current new value |
+| oldValue | `StoretifyEventValue` | last value |
+| newValue | `StoretifyEventValue` | current new value |
 | type| `string` | event type |
 | native | `StorageEvent` | native event |
 

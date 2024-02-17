@@ -2,26 +2,26 @@ import NextStorage from "../NextStorage"
 
 export type StorageEventKey = string | null
 export type StorageEventValue = string | null
-export type NextStorageValue = Record<string, any> | any[] | null | string | number
-export type NextStorageEventValue = Record<string, any> | any[] | null | string | number
+export type StoretifyValue = Record<string, any> | any[] | null | string | number
+export type StoretifyEventValue = Record<string, any> | any[] | null | string | number
 
 export type StoreArgument<T> = [string?, T?, number?]
 export type StoreListener = <T extends StoretifyEvent>(e: T) => void
 
-export type StoretifyStageMap = [null, NextStorageValue, NextStorage, NextStorage]
+export type StoretifyStageMap = [null, StoretifyValue, NextStorage, NextStorage]
 
-export type NextStorageEventValueOrNextStorage<K extends { length: number }> = StoretifyStageMap[K["length"]]
+export type StoretifyEventValueOrNextStorage<K extends { length: number }> = StoretifyStageMap[K["length"]]
 
 export interface StoretifyEvent extends Omit<StorageEvent, "newValue" | "oldValue"> {
-  newValue: NextStorageEventValue
-  oldValue: NextStorageEventValue
+  newValue: StoretifyEventValue
+  oldValue: StoretifyEventValue
   native: StorageEvent
 }
 
 export interface StoreStage {
   storage: NextStorage
-  set: (key: string, value: NextStorageValue, expires?: number) => void
-  get: (key: string) => NextStorageValue
+  set: (key: string, value: StoretifyValue, expires?: number) => void
+  get: (key: string) => StoretifyValue
   remove: (key: string, soft?: boolean) => void
   has: (key: string) => boolean
   clear: () => void

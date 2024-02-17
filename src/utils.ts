@@ -1,4 +1,4 @@
-import { NextStorageEventValue, StoreListener, StoretifyEvent } from "./type"
+import { StoretifyEventValue, StoreListener, StoretifyEvent } from "./type"
 
 export function dispatchStorageEvent({
   key,
@@ -22,8 +22,8 @@ export function jsonParse(data: string | null) {
 }
 
 export function each(funcs: StoreListener[], ev: StorageEvent, defaultKey: string | null) {
-  let newValue: NextStorageEventValue = null
-  let oldValue: NextStorageEventValue = null
+  let newValue: StoretifyEventValue = null
+  let oldValue: StoretifyEventValue = null
   try {
     newValue = jsonParse(ev.newValue)?.value ?? newValue
     oldValue = jsonParse(ev.oldValue)?.value ?? oldValue
