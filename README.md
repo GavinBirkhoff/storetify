@@ -162,10 +162,3 @@ source：[localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/
 `JSON.stringify(localStorage).length` How much capacity is currently occupied
 
 [Detect the upper limit of localstore capacity](https://arty.name/localstorage.html)
-
-## 🌈Version changes
-
-- v1 mainly has a `localStorage` that can set the expiration time and monitor key value changes
-- v2 mainly adjusts the enhanced definition of `typescript` types
-- v3 mainly enhances the return value parameter of the standard monitoring callback function, optimizes and adjusts the type definition
-- v?...introducing namespaces, and sessions, etc.

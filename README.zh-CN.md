@@ -162,10 +162,3 @@ store.getUsed() // 返回 `0.111 KB`
 `JSON.stringify(localStorage).length` 当前占用多大容量
 
 [检测localstore容量上限](https://arty.name/localstorage.html)
-
-## 🌈版本变化
-
-- v1主要是拥有一个`localStorage`可以设置过期时间和监听键值变化
-- v2主要调整了`typescript`类型的增强定义
-- v3主要增强规范监听回调函数的返回值参数，优化调整类型定义
-- v?...引入命名空间，以及会话等
