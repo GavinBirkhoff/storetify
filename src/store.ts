@@ -49,6 +49,7 @@ function init(): Storetify {
       }
     }
   }
+  // SP
   if (!storage.hasBindWindowEventStorage()) {
     storage.bindWindowEventStorage(true)
 

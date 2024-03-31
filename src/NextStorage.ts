@@ -7,18 +7,18 @@ import { dispatchStorageEvent, each, isValidKey, jsonParse } from "./utils"
 class NextStorage {
   namespace = "storetify"
 
-  protected store = localStorage
-
   protected observers = new Map()
 
   protected windowEventStorage = false
 
-  // eslint-disable-next-line no-use-before-define
   protected static storage: NextStorage | null = null
 
-  public static getInstance(): NextStorage {
+  protected constructor(protected store: Storage) {}
+
+  // SP
+  public static getInstance(store = window?.localStorage): NextStorage {
     if (!NextStorage.storage) {
-      NextStorage.storage = new NextStorage()
+      NextStorage.storage = new NextStorage(store)
     }
     return NextStorage.storage
   }

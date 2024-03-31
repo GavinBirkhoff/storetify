@@ -7,7 +7,7 @@
     "declaration": true,
     "outDir": "./dist",
     "importHelpers": true,
-    "declarationDir": "./types",
+    // "declarationDir": "./types",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
