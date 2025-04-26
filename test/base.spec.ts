@@ -33,11 +33,11 @@ describe("storetify api test", () => {
   test("test set get from expires", async () => {
     store.set("food", 3, 3)
     expect(store.get("food")).toBe(3)
-    const food = await new Promise(resolve =>
-      setTimeout(function () {
+    const food = await new Promise(resolve => {
+      setTimeout(() => {
         resolve(store.get("food"))
-      }, 3001),
-    )
+      }, 3001)
+    })
     expect(food).toBe(null)
   }, 7000)
   test("test set subscribe", done => {
@@ -57,14 +57,22 @@ describe("storetify api test", () => {
     expect(store.has("color2")).toBeFalsy()
   })
   test("test subscribe unsubscribe", () => {
-    store.subscribe("key1", () => {})
-    store.subscribe("key2", () => {})
-    store.subscribe("key3", () => {})
+    store.subscribe("key1", () => {
+      // 空函数用作占位符
+    })
+    store.subscribe("key2", () => {
+      // 空函数用作占位符
+    })
+    store.subscribe("key3", () => {
+      // 空函数用作占位符
+    })
     store.unsubscribe(["key1", "key2"])
   })
   test("test Exception", () => {
     // not input message to terminal
-    const consoleWarnSpy = jest.spyOn(console, "warn").mockImplementation(() => {})
+    const consoleWarnSpy = jest.spyOn(console, "warn").mockImplementation(() => {
+      // 空函数用作占位符
+    })
     store.set(1 as any, 1)
     expect(store(1 as any)).toBe(null)
     expect(consoleWarnSpy).toHaveBeenCalledWith("store failed, entry a valid string key.")

@@ -84,6 +84,16 @@ store.get("test"); // Get the string data of test
 store("test"); // Same function as above
 ```
 
+```ts
+store.get<CustomType>("test"); // Get the string data of test
+// or
+const t:CustomType = store.get("test");
+
+store("test"); // Same function as above
+// or
+const t:CustomType = store.("test");
+```
+
 ### remove
 
 delete data under key `store.remove(key)`
@@ -119,7 +129,18 @@ store.subscribe("test",(e)=>{})
 For the event variable e, it is an abbreviated object from the StorageEvent object, which provides some practical properties, which can be used to observe the changes of key-value pairs well, as shown in the following table：
 
 ```ts
-type StoretifyEventValue = Record<string, any> | any[] | null | string | number
+// JSON SAFE
+export type JSONPrimitive = string | number | boolean | null
+// eslint-disable-next-line no-use-before-define
+export type StoretifyValue = JSONPrimitive | JSONObject | JSONArray
+export interface JSONObject {
+  [key: string]: StoretifyValue
+}
+
+// eslint-disable-next-line no-use-before-define
+export type JSONArray = Array<StoretifyValue>
+
+export type StoretifyEventValue = StoretifyValue
 ```
 
 | Property | Type | Description|

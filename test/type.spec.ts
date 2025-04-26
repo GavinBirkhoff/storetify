@@ -39,7 +39,7 @@ describe("type", () => {
     // ✅ Test `subscribe` and `unsubscribe`
     const listener = (e: StoretifyEvent<{ a: number }>) => {
       e.oldValue.a = 1
-      console.log(e.key, e.oldValue, e.newValue)
+      console.log(e.key, e.oldValue, e.newValue, e.type)
     }
     store.subscribe("object", listener)
     store.unsubscribe("object", listener)
@@ -54,7 +54,7 @@ describe("type", () => {
     store("multiArg", "direct", 3600)
 
     // ✅ Type inference test
-    function typedSet<T extends StoretifyValue>(key: string, val: T) {
+    function typedSet<T extends StoretifyValue>(key: string, value: T) {
       store(key, val)
       const result: StoretifySafeValue<T> = store(key)
       return result

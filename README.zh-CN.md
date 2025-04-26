@@ -84,6 +84,16 @@ store.get("test"); // 获取test的字符串数据
 store("test"); // 功能同上
 ```
 
+```ts
+store.get<自定义类型>("test"); // 获取test的字符串数据
+// 或者
+const t:自定义类型 = store.get("test");
+
+store("test"); // 功能同上
+// 或者
+const t:自定义类型 = store.("test");
+```
+
 ### remove
 
 删除key下的数据 `store.remove(key)`
@@ -119,7 +129,18 @@ store.subscribe("test",(e)=>{})
 对于事件变量e，是一个来自StorageEvent对象的简略对象，提供了一些实用的属性，可以很好的观察键值对的变化，如下表：
 
 ```ts
-type StoretifyEventValue = Record<string, any> | any[] | null | string | number
+// JSON SAFE
+export type JSONPrimitive = string | number | boolean | null
+// eslint-disable-next-line no-use-before-define
+export type StoretifyValue = JSONPrimitive | JSONObject | JSONArray
+export interface JSONObject {
+  [key: string]: StoretifyValue
+}
+
+// eslint-disable-next-line no-use-before-define
+export type JSONArray = Array<StoretifyValue>
+
+export type StoretifyEventValue = StoretifyValue
 ```
 
 | Property | Type | Description|

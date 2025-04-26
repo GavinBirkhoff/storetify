@@ -31,16 +31,16 @@ describe("storetify", () => {
     expect(store.get("c")).toBe("c")
   })
   test("test subscribe", () => {
-    const fn = jest.fn()
-    store.subscribe("d", fn)
+    const fn2 = jest.fn()
+    store.subscribe("d", fn2)
     store("d", "d1")
-    expect(fn).toBeCalledTimes(1)
+    expect(fn2).toBeCalledTimes(1)
     store("d", "d1")
-    expect(fn).toBeCalledTimes(1)
+    expect(fn2).toBeCalledTimes(1)
     store("d", "d2")
-    expect(fn).toBeCalledTimes(2)
+    expect(fn2).toBeCalledTimes(2)
     store.remove("d")
-    expect(fn).toBeCalledTimes(3)
+    expect(fn2).toBeCalledTimes(3)
     expect(store("d")).toBe(null)
   })
   test("test subscribes", () => {
@@ -57,9 +57,9 @@ describe("storetify", () => {
     expect(fn2).toBeCalledTimes(2)
   })
   test("test subscribe unsubscribe", () => {
-    const fn1 = fn.fn1
-    const fn2 = fn.fn2
-    const fn3 = fn.fn3
+    const { fn1 } = fn
+    const { fn2 } = fn
+    const { fn3 } = fn
 
     store("f", "f1")
     store.subscribe("f", fn1)
@@ -110,9 +110,8 @@ describe("storetify", () => {
       },
       1,
     )
-    store.subscribe("str", () => {})
-    store.subscribe("str", e => {
-      e?.newValue, e?.oldValue
+    store.subscribe("str", () => {
+      // 空函数用作占位符
     })
     store("mm", 0)
     store("str", 98).get("98k")
