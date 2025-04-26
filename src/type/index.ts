@@ -2,11 +2,14 @@ import NextStorage from "../NextStorage"
 
 // JSON SAFE
 export type JSONPrimitive = string | number | boolean | null
+// eslint-disable-next-line no-use-before-define
 export type StoretifyValue = JSONPrimitive | JSONObject | JSONArray
 export interface JSONObject {
   [key: string]: StoretifyValue
 }
-export interface JSONArray extends Array<StoretifyValue> {}
+
+// eslint-disable-next-line no-use-before-define
+export type JSONArray = Array<StoretifyValue>
 
 export type StoretifySafeValue<T = StoretifyValue> = T | null
 export type StoreArgument<T extends StoretifyValue | ((...rest: any) => StoretifyValue)> = [string, T?, number?]

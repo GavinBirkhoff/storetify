@@ -8,7 +8,7 @@
   "unpkg": "./dist/storetify.min.js",
   "types": "./dist/storetify.d.ts",
   "scripts": {
-    "init": "npm install && npm run build",
+    "init": "pnpm install && pnpm run build",
     "lint": "eslint src --ext .js,.ts",
     "test": "jest --no-cache",
     "build": "swiftlet build",

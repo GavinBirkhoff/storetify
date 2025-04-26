@@ -10,11 +10,29 @@ module.exports = {
     ecmaVersion: "latest",
     sourceType: "module",
   },
+  settings: {
+    "import/resolver": {
+      node: {
+        extensions: [".js", ".jsx", ".ts", ".tsx"],
+      },
+    },
+  },
   plugins: ["@typescript-eslint"],
   rules: {
-    "prettier/prettier": "error",
-    "@typescript-eslint/no-inferrable-types": "2",
-    "import/extensions": "2",
-    "no-unresolved": "2",
+    "prettier/prettier": 2,
+    "@typescript-eslint/no-inferrable-types": 0,
+    "import/extensions": 0,
+    "no-unresolved": 0,
   },
+  overrides: [
+    {
+      files: [".eslintrc.js", "*.js"],
+      parser: "espree",
+      parserOptions: {
+        ecmaVersion: "latest",
+        sourceType: "module",
+        project: null,
+      },
+    },
+  ],
 }

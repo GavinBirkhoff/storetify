@@ -11,8 +11,10 @@ class NextStorage {
 
   protected windowEventStorage = false
 
+  // eslint-disable-next-line no-use-before-define
   protected static storage: NextStorage | null = null
 
+  // eslint-disable-next-line no-useless-constructor
   protected constructor(protected store: Storage) {}
 
   // SP
@@ -41,7 +43,7 @@ class NextStorage {
 
   public getUsed() {
     const storageUsed = JSON.stringify(this.getStore()).length / 1024
-    return storageUsed.toFixed(3) + " KB"
+    return `${storageUsed.toFixed(3)} KB`
   }
 
   public setStore<T extends Storage>(store: T) {

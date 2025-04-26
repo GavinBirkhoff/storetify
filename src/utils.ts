@@ -10,7 +10,7 @@ export function dispatchStorageEvent({
     key,
     newValue,
     oldValue,
-    url: location.href,
+    url: window.location.href,
     storageArea: localStorage,
   })
   window?.dispatchEvent(naturalStorageEvent)
@@ -56,7 +56,6 @@ export function each(funcs: StoreListener[], ev: StorageEvent, defaultKey: strin
 export function isValidKey(key: string) {
   if (typeof key !== "string") {
     console.warn("store failed, entry a valid string key.")
-    return
   }
 }
 

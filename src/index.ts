@@ -1,4 +1,5 @@
 import store from "./store"
+
 export {
   Storetify,
   StoreArgument,
@@ -12,5 +13,5 @@ export {
   StoretifySafeValue,
   StoreStage,
   StoretifyStage,
-} from "./type/"
+} from "./type"
 export default store
