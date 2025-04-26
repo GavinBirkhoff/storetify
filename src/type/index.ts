@@ -1,40 +1,58 @@
 import NextStorage from "../NextStorage"
 
-export type StorageEventKey = string | null
-export type StorageEventValue = string | null
-export type StoretifyValue = Record<string, any> | any[] | null | string | number
-export type StoretifyEventValue = Record<string, any> | any[] | null | string | number
+// JSON SAFE
+export type JSONPrimitive = string | number | boolean | null
+export type StoretifyValue = JSONPrimitive | JSONObject | JSONArray
+export interface JSONObject {
+  [key: string]: StoretifyValue
+}
+export interface JSONArray extends Array<StoretifyValue> {}
 
-export type StoreArgument<T> = [string?, T?, number?]
-export type StoreListener = <T extends StoretifyEvent>(e: T) => void
+export type StoretifySafeValue<T = StoretifyValue> = T | null
+export type StoreArgument<T extends StoretifyValue | ((...rest: any) => StoretifyValue)> = [string, T?, number?]
 
-export type StoretifyStageMap = [null, StoretifyValue, NextStorage, NextStorage]
-
-export type StoretifyEventValueOrNextStorage<K extends { length: number }> = StoretifyStageMap[K["length"]]
-
-export interface StoretifyEvent extends Omit<StorageEvent, "newValue" | "oldValue"> {
-  newValue: StoretifyEventValue
-  oldValue: StoretifyEventValue
+export type StoretifyEventValue = StoretifyValue
+export interface StoretifyEvent<T = StoretifyEventValue> extends Omit<StorageEvent, "newValue" | "oldValue"> {
+  newValue: T
+  oldValue: T
   native: StorageEvent
 }
+export type StoreListener = (e: any) => void
 
 export interface StoreStage {
   storage: NextStorage
-  set: (key: string, value: StoretifyValue, expires?: number) => void
-  get: (key: string) => StoretifyValue
-  remove: (key: string, soft?: boolean) => void
+  set: <T = StoretifyValue>(
+    key: string,
+    value: StoretifySafeValue<T> | ((...rest: any) => StoretifySafeValue<T>),
+    expires?: number,
+  ) => StoreStage
+  get: <T = StoretifyValue>(key: string) => StoretifySafeValue<T>
+  remove: (key: string, soft?: boolean) => StoreStage
   has: (key: string) => boolean
   clear: () => void
-  subscribe: (key: string, listener: (e: StoretifyEvent) => void) => void
-  unsubscribe: (keys: string | string[], listener?: (e: StoretifyEvent) => void) => void
+  subscribe: <T>(key: string, listener: (e: StoretifyEvent<T>) => void) => StoreStage
+  unsubscribe: <T>(keys: string | string[], listener?: (e: StoretifyEvent<T>) => void) => void
   getObserver(key: string): StoreListener[]
   getUsed: () => string
 }
 
+// StoreStage Partial
 export interface StoretifyStage extends Partial<StoreStage> {
-  <T, K extends StoreArgument<T>>(...rest: K): StoretifyStageMap[K["length"]]
+  <T extends StoretifyValue | ((...args: any) => StoretifySafeValue<T>)>(
+    key: string,
+    value: T,
+    expires?: number,
+  ): StoreStage
+  <T = StoretifyValue>(key: string): StoretifySafeValue<T>
+  <T>(...rest: StoreArgument<StoretifyValue | ((...args: any) => StoretifyValue)>): StoretifySafeValue<T> | StoreStage
 }
 
 export interface Storetify extends StoreStage {
-  <T, K extends StoreArgument<T>>(...rest: K): StoretifyStageMap[K["length"]]
+  <T extends StoretifyValue | ((...args: any) => StoretifySafeValue<T>)>(
+    key: string,
+    value: T,
+    expires?: number,
+  ): StoreStage
+  <T = StoretifyValue>(key: string): StoretifySafeValue<T>
+  <T>(...rest: StoreArgument<StoretifyValue | ((...args: any) => StoretifyValue)>): StoretifySafeValue<T> | StoreStage
 }

@@ -5,9 +5,6 @@ jest.mock("../example/fn")
 const keyPrefix = "test-storetify"
 const getKey = (key: string) => keyPrefix + key
 describe("storetify", () => {
-  test("store() return null", () => {
-    expect(store()).toBe(null)
-  })
   test("test store obj", () => {
     store.set("obj", { type: "object", value: { a: 1 } })
     expect(store("obj")).toEqual({ type: "object", value: { a: 1 } })

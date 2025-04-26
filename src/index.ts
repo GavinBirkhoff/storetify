@@ -2,11 +2,15 @@ import store from "./store"
 export {
   Storetify,
   StoreArgument,
-  StorageEventKey,
   StoreListener,
   StoretifyEvent,
-  StoretifyValue,
   StoretifyEventValue,
-  StoretifyStageMap,
+  JSONPrimitive,
+  JSONArray,
+  JSONObject,
+  StoretifyValue,
+  StoretifySafeValue,
+  StoreStage,
+  StoretifyStage,
 } from "./type/"
 export default store

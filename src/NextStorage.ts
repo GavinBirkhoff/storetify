@@ -52,7 +52,7 @@ class NextStorage {
     return this.store
   }
 
-  public set(key: string, value: StoretifyValue, expires?: number) {
+  public set<T = StoretifyValue>(key: string, value: T, expires?: number) {
     isValidKey(key)
     const val = JSON.stringify({ value, expires: expires ? expires * 1000 + Date.now() : expires })
     try {
@@ -64,7 +64,7 @@ class NextStorage {
     return this
   }
 
-  public get(key: string): StoretifyValue {
+  public get<T = StoretifyValue>(key: string): T | null {
     const val = this.getStore().getItem(key) ?? null
     if (val === null) {
       return val

@@ -1,24 +1,32 @@
 import NextStorage from "./NextStorage"
-import { Storetify, StoretifyStage, StoretifyStageMap, StoreArgument, StoreStage } from "./type"
+import { Storetify, StoreArgument, StoreStage, StoretifyValue } from "./type"
 
 const storage = NextStorage.getInstance()
 
-const store: StoretifyStage = function <T, K extends StoreArgument<T>>(...rest: K): StoretifyStageMap[K["length"]] {
+function store<T extends StoretifyValue | ((...args: any) => StoretifyValue)>(
+  key: string,
+  value: T,
+  expires?: number,
+): StoreStage
+function store<T = StoretifyValue>(key: string): T
+function store(
+  ...rest: StoreArgument<StoretifyValue | ((...args: any) => StoretifyValue)>
+): StoretifyValue | StoreStage {
   const len = rest.length
   const [key, value, expires] = rest
   if (len === 1 && typeof key === "string") {
-    return storage.get(key) as StoretifyStageMap[K["length"]]
+    return storage.get(key)
   }
   if (len >= 2 && typeof key === "string") {
     if (value === undefined) {
-      return storage.remove(key) as StoretifyStageMap[K["length"]]
+      return storage.remove(key) as unknown as StoreStage
     }
     if (typeof value === "function") {
-      return storage.set(key, value(), expires) as StoretifyStageMap[K["length"]]
+      return storage.set(key, value(), expires) as unknown as StoreStage
     }
-    return storage.set(key, value, expires) as StoretifyStageMap[K["length"]]
+    return storage.set(key, value, expires) as unknown as StoreStage
   }
-  return null as StoretifyStageMap[K["length"]]
+  return null
 }
 
 function init(): Storetify {
@@ -34,7 +42,7 @@ function init(): Storetify {
       }
     }
   })
-  store.storage = storage
+  ;(store as any).storage = storage
   function dispatchPublish(ev: StorageEvent) {
     const { key, newValue, oldValue, isTrusted } = ev
     if (key !== null && newValue !== oldValue) {
@@ -49,7 +57,7 @@ function init(): Storetify {
       }
     }
   }
-  // SP
+  // SP TODO
   if (!storage.hasBindWindowEventStorage()) {
     storage.bindWindowEventStorage(true)
 
